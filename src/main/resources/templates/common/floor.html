@@ -1,0 +1,118 @@
+<!-- 底部导航 -->
+<div class="foot_menu">
+    <ul>
+
+        <#if selected?? && selected == "index">
+        <li class="cur">
+            <a href="${request.contextPath}/public/index">
+                <i><img src="${request.contextPath}/images/menu_icon01_r.png"></i>
+                <span>首页</span>
+            </a>
+        </li>
+        <#else>
+        <li>
+            <a href="${request.contextPath}/public/index">
+                <i><img src="${request.contextPath}/images/menu_icon01.png"></i>
+                <span>首页</span>
+            </a>
+        </li>
+       </#if>
+
+
+        <#if user??>
+
+        <#if user.type == 1>
+
+                <#if selected?? && selected == "job">
+                <li class="cur">
+                    <a href="${request.contextPath}/public/job">
+                        <i><img src="${request.contextPath}/images/person_img/menu_icon02_01_r.png"></i>
+                        <span>求职</span>
+                    </a>
+                </li>
+                <#else>
+                    <li>
+                        <a href="${request.contextPath}/public/job">
+                            <i><img src="${request.contextPath}/images/person_img/menu_icon02_01.png"></i>
+                            <span>求职</span>
+                        </a>
+                    </li>
+                </#if>
+        <#elseif user.type == 2>
+                <#if selected?? && selected == "job">
+                    <li class="cur">
+                    <a href="${request.contextPath}/public/job">
+                        <i><img src="${request.contextPath}/images/person_img/menu_icon02_01_r.png"></i>
+                        <span>招聘</span>
+                    </a>
+                </li>
+                <#else>
+                <li>
+                    <a href="${request.contextPath}/public/job">
+                        <i><img src="${request.contextPath}/images/person_img/menu_icon02_01.png"></i>
+                        <span>招聘</span>
+                    </a>
+                </li>
+                </#if>
+    </#if>
+
+
+    <#else>
+            <#if selected?? && selected == "job">
+            <li class="cur">
+                <a href="${request.contextPath}/public/job">
+                    <i><img src="${request.contextPath}/images/person_img/menu_icon02_01_r.png"></i>
+                    <span>求职</span>
+                </a>
+            </li>
+            <#else>
+            <li>
+                <a href="${request.contextPath}/public/job">
+                    <i><img src="${request.contextPath}/images/person_img/menu_icon02_01.png"></i>
+                    <span>求职</span>
+                </a>
+            </li>
+            </#if>
+</#if>
+
+<!--消息-->
+<#if selected?? && selected == "message">
+<li class="info cur">
+    <a href="${request.contextPath}/user/message">
+        <i><img src="${request.contextPath}/images/menu_icon03_r.png"></i>
+        <span>消息</span>
+        <em></em>
+    </a>
+</li>
+<#else>
+<li class="info">
+    <a href="${request.contextPath}/user/message">
+        <i><img src="${request.contextPath}/images/menu_icon03.png"></i>
+        <span>消息</span>
+        <em></em>
+    </a>
+</li>
+</#if>
+<!--我的-->
+<#if selected?? && selected == "me">
+<li class="cur">
+    <a href="${request.contextPath}/user/me">
+        <i><img src="${request.contextPath}/images/menu_icon04_r.png"></i>
+        <span>我的</span>
+    </a>
+</li>
+<#else>
+<li>
+    <a href="${request.contextPath}/user/me">
+        <i><img src="${request.contextPath}/images/menu_icon04.png"></i>
+        <span>我的</span>
+    </a>
+</li>
+</#if>
+
+
+
+</ul>
+</div>
+
+</div>
