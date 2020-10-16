@@ -1,9 +1,12 @@
 package com.jiantai.talent.controller;
 
 import com.jiantai.talent.entity.User;
+import com.jiantai.talent.service.serviceImpl.UserServiceImpl;
 import com.jiantai.talent.vo.ResultVo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +17,9 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping("user")
 public class UserController {
+    @Autowired
+    private UserServiceImpl userServiceImpl;
+
     /**
      * 跳转到 "我的" 页面
      * @return
@@ -63,8 +69,28 @@ public class UserController {
         mv.setViewName("user/recruit");
         return mv;
     }
-    public ResultVo changeResumeState(){
+
+    /**
+     * 应聘者修改其简历是否公开
+     * @param u
+     * @param request
+     * @return
+     */
+    @RequestMapping("changeResumeState")
+    @ResponseBody
+    public ResultVo changeResumeState(User u,HttpServletRequest request){
         ResultVo resultVo = new ResultVo();
+        User user = (User)request.getSession().getAttribute("user");
+        if (u.getResumeState() == 0 || u.getResumeState() == 1){
+            user.setResumeState(u.getResumeState());
+            userServiceImpl.updateResumeState(user);
+            resultVo.setCode(0);
+            resultVo.setMsg("更新简历公开状态成功");
+            request.getSession().setAttribute("user",user);//重新存进session--因为修改了数据
+        }else {
+            resultVo.setMsg("更新简历公开状态失败");
+        }
+
 
         return resultVo;
     }

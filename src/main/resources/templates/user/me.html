@@ -61,9 +61,9 @@
 				$(document).ready(function(e) {
 					$('input').lc_switch();
 					$('body').delegate('.lcs_check', 'lcs-statuschange', function() {
-						var state = ($(this).is(':checked')) ? '1' : '0';
+						var state = ($(this).is(':checked')) ? '0' : '1';
 						$.ajax({
-							url:"changeResumeState?state="+state,
+							url:"changeResumeState?resumeState="+state,
 							type:"get",
 							dataType:"json",
 							success:function (data) {

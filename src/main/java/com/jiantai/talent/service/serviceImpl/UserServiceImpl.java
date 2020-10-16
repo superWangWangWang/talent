@@ -25,4 +25,9 @@ public class UserServiceImpl implements UserService {
     public void addUserNickName(User user) {
         userMapper.addUserNickName(user);
     }
+
+    @Override
+    public void updateResumeState(User user) {
+        userMapper.updateResumeState(user);
+    }
 }

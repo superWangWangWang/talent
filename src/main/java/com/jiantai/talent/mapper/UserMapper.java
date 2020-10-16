@@ -1,10 +1,7 @@
 package com.jiantai.talent.mapper;
 
 import com.jiantai.talent.entity.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface UserMapper {
@@ -23,6 +20,17 @@ public interface UserMapper {
     @Insert("INSERT INTO `talent`.`user` (`account`,`pwd`) VALUES (#{user.account},#{user.pwd})")
     void register(@Param("user") User user);
 
+    /**
+     * 注册的时候添加昵
+     * @param user
+     */
     @Insert("INSERT INTO `talent`.`staff_info` (`uid`,`nick_name`) VALUES(#{user.id},#{user.nickName})")
     void addUserNickName(@Param("user") User user);
+
+    /**
+     * 应聘者修改其简历是否公开
+     * @param user
+     */
+    @Update("update `staff_info` set `resume_state` = #{user.resumeState} where uid = #{user.id}")
+    void updateResumeState(@Param("user") User user);
 }
