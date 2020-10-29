@@ -31,8 +31,8 @@ public class User {
     private String name;
     //sex                 int(1)        性别，0=女，1=男
     private Integer sex;
-    //birth               varchar(10)   出生年月、2020-12-12
-    private String birth;
+    //age               int(3)   年龄
+    private Integer age;
     //native_place        varchar(32)   籍贯
     private String nativePlace;
     //national            varchar(32)   民族
@@ -77,7 +77,7 @@ public class User {
                 ", nickName='" + nickName + '\'' +
                 ", name='" + name + '\'' +
                 ", sex=" + sex +
-                ", birth='" + birth + '\'' +
+                ", age=" + age +
                 ", nativePlace='" + nativePlace + '\'' +
                 ", national='" + national + '\'' +
                 ", height=" + height +
@@ -191,12 +191,12 @@ public class User {
         this.sex = sex;
     }
 
-    public String getBirth() {
-        return birth;
+    public Integer getAge() {
+        return age;
     }
 
-    public void setBirth(String birth) {
-        this.birth = birth;
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
     public String getNativePlace() {

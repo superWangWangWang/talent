@@ -3,13 +3,17 @@ package com.jiantai.talent.controller;
 import com.jiantai.talent.entity.User;
 import com.jiantai.talent.service.serviceImpl.UserServiceImpl;
 import com.jiantai.talent.vo.ResultVo;
+import com.mysql.cj.util.StringUtils;
+import org.apache.tomcat.util.security.MD5Encoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import sun.security.provider.MD5;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -29,6 +33,7 @@ public class PublicController {
      */
     @RequestMapping("index")
     public ModelAndView index(HttpServletRequest request){
+
         User user = (User)request.getSession().getAttribute("user");
         ModelAndView mv = new ModelAndView();
         mv.setViewName("public/index");
@@ -69,6 +74,7 @@ public class PublicController {
         ResultVo resultVo = new ResultVo();
         String account = request.getParameter("account");
         String password = request.getParameter("password");
+        password = DigestUtils.md5DigestAsHex(password.getBytes());
         User user = userServiceImpl.findUser(account);
         if (user != null){
             //判断密码
@@ -113,7 +119,7 @@ public class PublicController {
     public ResultVo registerPost(User u,HttpServletRequest request){
         ResultVo resultVo = new ResultVo();
 
-        resultVo.setMsg("注册成功");
+        //resultVo.setMsg("注册成功");
 //        User user = new User();
 //        user.setAccount("aaa");
         //先查有没有注册过此账号
@@ -122,16 +128,23 @@ public class PublicController {
             //已被注册
             resultVo.setMsg("该账号已被注册");
         }else {
+            System.out.println(u);
+            //密码使用MD5加密
+            String md5Pwd = DigestUtils.md5DigestAsHex(u.getPwd().getBytes());
+            u.setPwd(md5Pwd);
             //插入user表
             userServiceImpl.register(u);
-            //先查出来
+            //先查出来--为了拿到id
             User nuser = userServiceImpl.findUser(u.getAccount());
             nuser.setNickName(u.getNickName());
             //插入昵称到user_info表
             userServiceImpl.addUserNickName(nuser);
+
+            nuser = userServiceImpl.findUser(u.getAccount());
             //存到session中
             request.getSession().setAttribute("user",nuser);
             resultVo.setCode(0);
+            resultVo.setMsg("注册成功");
         }
 
 

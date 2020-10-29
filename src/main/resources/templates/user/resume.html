@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<#include "/common/head.html">
+<script src="${request.contextPath}/layui/layui.js" charset="utf-8"></script>
+<body>
+<header class="zy_search_top_box scroll_fix">
+	<div class="zy_title_top fix">
+		<div class="one" href="javascript:" onclick="history.back();"><img src="../images/back_jt.png"><span>返回</span></div>
+		<h1>我的简历</h1>
+		
+	</div>
+</header>	
+
+<!-- 占位框 -->
+<div class="top_zhanwei_box"></div>	
+
+<!-- 内容框 -->
+<div class="zy_module-content zy_vip_conbox">
+	<div class="vip_user_resume">
+		<ul>
+			<#list resumeList as list>
+			<li>
+				<dl>
+					<dt>求职 ${list.intention}</dt>
+					<dd>更新：${list.updateTime?string('yyyy-MM-dd HH:mm:ss')}</dd>
+				</dl>
+				<h2>
+					<a href="editResume?resumeId=${list.id}">编辑</a>
+					<a onclick="deleteResume('${list.intention}','${list.id}')">删除</a>
+				</h2>
+			</li>
+			</#list>
+		<#if info.resume?? && info.resume != "">
+			<li>
+				<dl>
+					<dt>PDF简历</dt>
+
+				</dl>
+				<h2>
+					<a href="editResume?resumeId=1">预览</a>
+					<a onclick="deleteResume('$1','1')">删除</a>
+				</h2>
+			</li>
+		</#if>
+		</ul>
+<!--		<div class="jianl2" style="left: 0; bottom: 0; width: 100%;padding:.05rem 0; background-color: #f2b300;">-->
+<!--			<a class="zy_butn db" href="">上传自制简历</a></div>-->
+		<div class="jianl">
+<!--			<button type="button" class="layui-btn layui-btn-primary" id="test4"><i class="layui-icon"></i>只允许压缩文件</button>-->
+
+			<#if info.resume?? && info.resume != "">
+			<a class="zy_butn db layui-btn " id="test4" >自制PDF简历(已上传)</a>
+			<#else>
+			<a class="zy_butn db layui-btn " id="test4" >上传自制PDF简历</a>
+			</#if>
+<!--			<button type="button" class="layui-btn layui-btn-primary" id="test4">上传自制简历</button>-->
+			<HR style="height:0px; border-top:5px solid #ffffff; border-right:0px; border-bottom:0px; border-left:0px;">
+			<a class="zy_butn db" href="createResume">新增简历(最多3份)</a>
+		</div>
+	</div>
+</div>
+
+</body>
+<script>
+	function deleteResume(resumeName,resumeId) {
+		confirm({
+			title: '删除简历' + "【" + resumeName + "】",
+			content: '',
+			doneText: '确定',
+			cancalText: '取消'
+		}).then(() => {
+
+			$.ajax({
+				url:"deleteResume?resumeId=" + resumeId,
+				dataType:"json",
+				type:"get",
+				success:function (data) {
+					if (data.code == 0){
+						location.reload();
+					}else {
+						toast({time: 2000, content: data.msg})
+					}
+				}
+			})
+		}).catch(() => {
+			//console.log('已取消')
+		})
+	}
+</script>
+
+<script>
+	layui.use('upload', function(){
+		var $ = layui.jquery
+				,upload = layui.upload;
+
+		upload.render({ //允许上传的文件后缀
+			elem: '#test4'
+			,url: 'upload?type=0' //改成您自己的上传接口
+			,accept: 'file' //普通文件
+			,exts: 'pdf' //只允许上传pdf文件
+			,done: function(data){
+				if (data.code == 0){
+					location.reload()
+				}else {
+					toast({time: 2000, content: data.msg})
+				}
+
+			}
+		});
+
+
+	});
+</script>
+</html>

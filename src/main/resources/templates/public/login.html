@@ -1,36 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8">
-<meta content="招聘" http-equiv="keywords">
-<meta name="description" content="招聘,培训">
-<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
-<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
-<meta name="renderer" content="webkit" />
-
-<title>建泰人才资源平台</title>
-<!-- css -->
-<link rel="stylesheet" type="text/css" href="${request.contextPath}/css/index.css">
-<link rel="stylesheet" type="text/css" href="${request.contextPath}/css/swiper.min.css">
-
-<!-- public_css -->
-<link rel="stylesheet" type="text/css" href="${request.contextPath}/css/public/public_lib.css">
-
-<!-- zy_public_css -->
-<link rel="stylesheet" type="text/css" href="${request.contextPath}/css/zy_public.css">
-<!-- 入驻 新闻 登录css -->
-<link rel="stylesheet" type="text/css" href="${request.contextPath}/css/news_login_apply.css">
-
-	<link rel="stylesheet" href="${request.contextPath}/message/font/iconfont.css">
-
-<!-- js -->
-<script type="text/javascript" src="${request.contextPath}/js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="${request.contextPath}/js/swiper.min.js"></script>
-<script type="text/javascript" src="${request.contextPath}/js/public.js"></script>
-
-	<script src="${request.contextPath}/message/message.js"></script>
-
-</head>
+<#include "/common/head.html">
 <body>
 
 <div class="zy_login_box">
@@ -39,7 +9,7 @@
 			<div class="one" href="javascript:" onclick="history.back();"><img src="${request.contextPath}/images/back_jt.png"><span>返回</span></div>
 			<h1>登录</h1>
 			<div class="r">
-		    	<a href="${request.contextPath}/public/register">免费注册</a>
+		    	<a href="${request.contextPath}/public/register" >免费注册</a>
 		    </div>
 		</div>
 	</header>	
@@ -49,10 +19,13 @@
 		<div class="login_box">
 			<div class="logo"><img src="${request.contextPath}/images/common_img/logo02.png"></div>
 			<form id="login_form" method="post">
-				<div class="login_style"><span class="cur">找工作</span><span>找人才</span></div>
+<!--				<div class="login_style">-->
+<!--					<span class="cur">好工作上建泰人才网</span>-->
+<!--&lt;!&ndash;					<span>找人才</span>&ndash;&gt;-->
+<!--				</div>-->
 
 				<div class="form_line">
-					<label><a><img src="${request.contextPath}/images/zy_icon_user.png"></a><input type="text" name="account" id="account" placeholder="请输入账号"></label>
+					<label><a><img src="${request.contextPath}/images/zy_icon_user.png"></a><input  type="text" name="account" id="account" placeholder="请输入账号"></label>
 				</div>
 				<div class="form_line">
 					<label><a><img src="${request.contextPath}/images/zy_icon_mm.png"></a><input type="password" name="password" id="password" placeholder="请输入密码"></label>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<#include "/common/head.html">
+
+<style>
+/*html {*/
+/*  margin: 0;*/
+/*  padding: 0;*/
+/*  background-color: white;*/
+/*}*/
+
+/*body,*/
+/*html {*/
+/*  width: 100%;*/
+/*  height: 100%;*/
+/*  overflow: hidden;*/
+/*}*/
+
+#svgContainer {
+  width: 640px;
+  height: 512px;
+  background-color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+</style>
+<body>
+<header class="zy_search_top_box scroll_fix">
+    <div class="zy_title_top fix">
+        <div class="one" href="javascript:" onclick="history.back();"><img src="${request.contextPath}/images/back_jt.png"><span>返回</span></div>
+        <h1>未知错误</h1>
+    </div>
+</header>
+
+<!-- 占位框 -->
+<div class="top_zhanwei_box"></div>
+
+<!-- 内容框 -->
+<div class="zy_module-content">
+        <script type="text/javascript" src="${request.contextPath}/js/bodymovin.js"></script>
+        <script type="text/javascript" src="${request.contextPath}/js/data.js"></script>
+        <div id="svgContainer"></div>
+
+        <script type="text/javascript">
+        var svgContainer = document.getElementById('svgContainer');
+        var animItem = bodymovin.loadAnimation({
+          wrapper: svgContainer,
+          animType: 'svg',
+          loop: true,
+          animationData: JSON.parse(animationData)
+        });
+        </script>
+
+        <div style="text-align:center;margin:10px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+        </div>
+
+<!--    </div>-->
+
+    <!-- 返回顶部 -->
+    <div class="go_top">
+        <a class="btn_top"></a>
+    </div>
+
+    <#include "/common/floor.html">
+</div>
+
+
+</body>
+
+<!--<body>-->
+
+<!--<script type="text/javascript" src="${request.contextPath}/js/bodymovin.js"></script>-->
+<!--<script type="text/javascript" src="${request.contextPath}/js/data.js"></script>-->
+<!--<h1>未知错误</h1>-->
+<!--<div id="svgContainer"></div>-->
+
+<!--<script type="text/javascript">-->
+<!--var svgContainer = document.getElementById('svgContainer');-->
+<!--var animItem = bodymovin.loadAnimation({-->
+<!--  wrapper: svgContainer,-->
+<!--  animType: 'svg',-->
+<!--  loop: true,-->
+<!--  animationData: JSON.parse(animationData)-->
+<!--});-->
+<!--</script>-->
+
+<!--<div style="text-align:center;margin:10px 0; font:normal 14px/24px 'MicroSoft YaHei';">-->
+<!--</div>-->
+<!--</body>-->
+</html>
+

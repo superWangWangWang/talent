@@ -269,7 +269,10 @@
 	text-align: center; 
 }
 .vip_head .head i{display: block; margin:0 auto; width: 1.3rem; height: 1.3rem;border-radius:100%;
-	overflow: hidden; border:#fff solid 3px; overflow: hidden;box-sizing: border-box;
+	/*overflow: hidden; */
+	/*border:#fff solid 3px; */
+	/*overflow: hidden;*/
+	box-sizing: border-box;
 }
 .vip_head .head img{display: block; margin:0 auto;width: 100%; height: 100%;}
 .vip_head .head span{display: block; font-size: .22rem; color: #333; margin:3% 0;}
@@ -279,8 +282,8 @@
 .vip_head .head .state{display: inline-block; border:#3d3c41 solid 1px;border-radius: 100px; 
 	overflow: hidden; line-height: .36rem; margin-top: 3%; 
 }
-.vip_head .head .state em{font-style:normal; font-size: .2rem; color: #3d3c41; float: left; padding:0 .5em;position: relative; z-index: 5;}
-.vip_head .head .state em.on{color: #f2b300; }
+.vip_head .head .state em{font-style:normal; font-size: .2rem; color: #aab2bd; float: left; padding:0 .5em;position: relative; z-index: 5;background-color: #ffffff}
+.vip_head .head .state em.on{color: #ffffff;;background-color: #000000}
 .vip_head .head .state b{position: absolute;top:0; left:0;height: 100%; width: 50%; background-color: #3d3c41;}
 
 .vip_menu ul{ background-color: #fff; }
@@ -354,13 +357,16 @@
 .vip_user_resume ul li dl dt{ font-size:.3rem; color: #333; line-height: 160%; margin:.1rem auto .24rem; }
 .vip_user_resume ul li dl dd{font-size:.22rem; color: #999;}
 .vip_user_resume ul li h2{ float: right; }
-.vip_user_resume ul li h2 a{ display: block; font-size:.22rem; color: #fff;background-color: #f2b300; border-radius: 3px; 
+.vip_user_resume ul li h2 a{ display: block; font-size:.22rem; color: #fff;background-color: #f2b300; border-radius: 3px;
 	width: 1.2rem; height: .44rem;line-height: .44rem; text-align: center; margin:.15rem 0;
 }
-.vip_user_resume ul li h2 a:last-child{ color: #999; background-color: #eee; }
+.vip_user_resume ul li h2 a:last-child{ color: white; background-color: #aab2bd; }
+
 
 .vip_user_resume .jianl{position: fixed; left: 0; bottom: 0; width: 100%;padding:.05rem 0; background-color: #f2b300;}
 .vip_user_resume .jianl .zy_butn{ font-size:.3rem; }
+.vip_user_resume .jianl .layui-upload-file{ display: none; }
+
 
 /*创建简历*/
 .vip_user_createbox{ padding: 0; }

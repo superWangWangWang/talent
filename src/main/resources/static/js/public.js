@@ -16,10 +16,10 @@ $(function(){
 	)
 })
 
-// 预加载
-window.onload = function () {
-	document.getElementById('loading-mask').style.display = 'none';
-}
+// // 预加载
+// window.onload = function () {
+// 	document.getElementById('loading-mask').style.display = 'none';
+// }
 
 //占位框高度获取
 $(function(){

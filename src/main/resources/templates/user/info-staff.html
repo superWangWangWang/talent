@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<#include "/common/head.html">
+<link rel="stylesheet" href="${request.contextPath}/layui/css/layui.css"  media="all">
+<script src="${request.contextPath}/layui/layui.js" charset="utf-8"></script>
+
+<link rel="stylesheet" href="${request.contextPath}/css/cropper.min.css">
+<link rel="stylesheet" href="${request.contextPath}/css/ImgCropping.css">
+<script type="text/javascript" src="${request.contextPath}/js/cropper.min.js"></script>
+
+<body class="bgwh">
+
+<header class="zy_search_top_box scroll_fix">
+	<div class="zy_title_top fix">
+		<div class="one" href="javascript:" onclick="history.back();"><img src="${request.contextPath}/images/back_jt.png"><span>返回</span></div>
+		<h1>账户信息</h1>
+		
+	</div>
+</header>
+<!-- 占位框 -->
+<div class="top_zhanwei_box"></div>
+
+<!-- 内容框 -->
+<div class="zy_module-content zy_vip_conbox">
+<div class="vip_user_info_mima vip_user_info_person">
+
+
+	<div align="center" style="">
+		<button id="replaceImg" >
+			<#if user.photo?? && user.photo != "">
+				<img id="finalImg" src="showImg?type=photo" style="width:200px; height:200px; border-radius:50%; background: #fff;box-shadow: 0 0 0 5px #88bde8;">
+			<#else>
+				<#if user.sex == 0>
+					<img id="finalImg" src="${request.contextPath}/images/common_img/woman.png" style="width:200px; height:200px; border-radius:50%; background: #fff;box-shadow: 0 0 0 5px #88bde8;">
+				<#else>
+					<img id="finalImg" src="${request.contextPath}/images/common_img/man.png" style="width:200px; height:200px; border-radius:50%; background: #fff;box-shadow: 0 0 0 5px #88bde8;">
+				</#if>
+			</#if>
+
+		</button>
+	</div>
+
+
+	<!--图片裁剪框 start-->
+	<div style="display: none" class="tailoring-container">
+		<div class="black-cloth" onClick="closeTailor(this)"></div>
+		<div class="tailoring-content">
+			<div class="tailoring-content-one">
+				<label title="上传图片" for="chooseImg" class="l-btn choose-btn">
+					<input type="file" accept="image/jpg,image/jpeg,image/png" name="file" id="chooseImg" class="hidden" onChange="selectImg(this)">
+					选择图片
+				</label>
+				<div class="close-tailoring"  onclick="closeTailor(this)">×</div>
+			</div>
+			<div class="tailoring-content-two">
+				<div class="tailoring-box-parcel">
+					<img id="tailoringImg">
+				</div>
+				<div class="preview-box-parcel">
+<!--					<p style="font-weight: bolder">图片预览：</p>-->
+<!--					<div class="square previewImg"></div>-->
+
+						<div class="circular previewImg"></div>
+
+
+				</div>
+			</div>
+
+			<div class="tailoring-content-three">
+				<button class="l-btn cropper-reset-btn">复位</button>
+				<button class="l-btn cropper-rotate-btn">旋转</button>
+				<button class="l-btn cropper-scaleX-btn">换向</button>
+				<button class="l-btn sureCut" id="sureCut">确定</button>
+			</div>
+		</div>
+	</div>
+	<!--图片裁剪框 end-->
+<form id="info-form">
+
+
+<!--		<form id="info-form" action="test" method="post">-->
+            <div class="form_line"><label><span>用户昵称</span><input type="text" name="nickName" value="${user.nickName!}"></label></div>
+            <div class="form_line"><label><span>真实姓名</span><input type="text" name="name" value="${(user.name)!}" placeholder="请填写真实姓名"></label></div>
+			<div class="form_line sexbox bbd">
+				<span>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别</span>
+					<#if user??>
+					<label>
+					<select name="sex" class="text"
+							style="height:40px;-webkit-appearance:none;appearance:none;border: 1px solid #6d6d72;
+							font-size:20px;padding:0px 10px 0px;
+							display:block;width:100%;-webkit-box-sizing:border-box;box-sizing:border-box;background-color: #FFFFFF;
+							color:#333333;border-radius:4px;">
+							<#if user.sex == 0>
+							<option value="0" selected>女</option>
+							<option value="1">男</option>
+							<option value="1">其他</option>
+							<#elseif user.sex == 1>
+							<option value="0" >女</option>
+							<option value="1" selected>男</option>
+							<option value="1">其他</option>
+							<#elseif user.sex == 2>
+							<option value="0" >女</option>
+							<option value="1" >男</option>
+							<option value="1" selected>其他</option>
+							<#else>
+							<option value="0" >女</option>
+							<option value="1" >男</option>
+							<option value="1" >其他</option>
+							</#if>
+
+					</select>
+					</label>
+					</#if>
+
+			</div>
+
+
+			<div class="form_line"><label>
+				<span>年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;龄</span>
+				<input type="text" name="age" placeholder="请填写年龄" value="${user.age!}"></label></div>
+            <div class="form_line tel"><label>
+				<span>联系方式</span>
+				<input type="text" name="phoneNumber" placeholder="请填写联系电话" value="${user.phoneNumber!}">
+<!--				<em>已认证</em>-->
+			</label></div>
+			<input hidden="hidden" id="photo" name="photo" value="">
+            <button class="zy_butn bord_3" type="button" onclick="update()">确认修改</button>
+		</form>
+		
+	</div>
+</div>
+
+</body>
+<script>
+	function update() {
+		$.ajax({
+			url:"updateStaffInfo",
+			type:"post",
+			dataType:"json",
+			data:$("#info-form").serialize(),
+			success:function (data) {
+				console.log(data)
+			}
+		})
+	}
+
+</script>
+
+<script type="text/javascript">
+
+	//弹出框水平垂直居中
+	(window.onresize = function () {
+		var win_height = $(window).height();
+		var win_width = $(window).width();
+		if (win_width <= 768){
+			$(".tailoring-content").css({
+				"top": (win_height - $(".tailoring-content").outerHeight())/2,
+				"left": 0
+			});
+		}else{
+			$(".tailoring-content").css({
+				"top": (win_height - $(".tailoring-content").outerHeight())/2,
+				"left": (win_width - $(".tailoring-content").outerWidth())/2
+			});
+		}
+	})();
+
+	//弹出图片裁剪框
+	$("#replaceImg").on("click",function () {
+
+		$(".tailoring-container").toggle();
+	});
+	//图像上传
+	function selectImg(file) {
+		if (!file.files || !file.files[0]){
+
+			return;
+		}
+		var reader = new FileReader();
+		reader.onload = function (evt) {
+			var replaceSrc = evt.target.result;
+			//更换cropper的图片
+			$('#tailoringImg').cropper('replace', replaceSrc,false);//默认false，适应高度，不失真
+		}
+		reader.readAsDataURL(file.files[0]);
+
+	}
+	//cropper图片裁剪
+	$('#tailoringImg').cropper({
+		aspectRatio: 1/1,//默认比例
+		preview: '.previewImg',//预览视图
+		guides: false,  //裁剪框的虚线(九宫格)
+		autoCropArea: 0.5,  //0-1之间的数值，定义自动剪裁区域的大小，默认0.8
+		movable: false, //是否允许移动图片
+		dragCrop: false,  //是否允许移除当前的剪裁框，并通过拖动来新建一个剪裁框区域
+		movable: true,  //是否允许移动剪裁框
+		resizable: true,  //是否允许改变裁剪框的大小
+		zoomable: false,  //是否允许缩放图片大小
+		mouseWheelZoom: false,  //是否允许通过鼠标滚轮来缩放图片
+		touchDragZoom: true,  //是否允许通过触摸移动来缩放图片
+		rotatable: true,  //是否允许旋转图片
+		crop: function(e) {
+			// 输出结果数据裁剪图像。
+		}
+	});
+	//旋转
+	$(".cropper-rotate-btn").on("click",function () {
+		$('#tailoringImg').cropper("rotate", 45);
+	});
+	//复位
+	$(".cropper-reset-btn").on("click",function () {
+		$('#tailoringImg').cropper("reset");
+	});
+	//换向
+	var flagX = true;
+	$(".cropper-scaleX-btn").on("click",function () {
+		if(flagX){
+			$('#tailoringImg').cropper("scaleX", -1);
+			flagX = false;
+		}else{
+			$('#tailoringImg').cropper("scaleX", 1);
+			flagX = true;
+		}
+		flagX != flagX;
+	});
+
+	//裁剪后的处理
+	$("#sureCut").on("click",function () {
+		if ($("#tailoringImg").attr("src") == null ){
+			return false;
+		}else{
+			var cas = $('#tailoringImg').cropper('getCroppedCanvas');//获取被裁剪后的canvas
+			var base64url = cas.toDataURL('image/png'); //转换为base64地址形式
+			$("#finalImg").prop("src",base64url);//显示为图片的形式
+
+			//关闭裁剪框
+			closeTailor();
+			//console.log(base64url);
+			document.getElementById("photo").value = base64url;
+		}
+	});
+	//关闭裁剪框
+	function closeTailor() {
+		$(".tailoring-container").toggle();
+
+	}
+</script>
+</html>

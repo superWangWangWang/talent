@@ -1,34 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8">
-<meta content="招聘" http-equiv="keywords">
-<meta name="description" content="招聘,培训">
-<meta name="format-detection" content="telephone=no"><!-- 禁止IPHONE识别手机号码 -->
-<meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
-<meta name="renderer" content="webkit" />
-
-<title>人和职业微平台</title>
-<!-- css -->
-<link rel="stylesheet" type="text/css" href="../css/index.css">
-<link rel="stylesheet" type="text/css" href="../css/swiper.min.css">
-
-<!-- public_css -->
-<link rel="stylesheet" type="text/css" href="../css/public/public_lib.css">
-
-<!-- zy_public_css -->
-<link rel="stylesheet" type="text/css" href="../css/zy_public.css">
-<!-- 子页css -->
-<link rel="stylesheet" type="text/css" href="../css/children.css">
-
-<!-- js -->
-<script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="../js/swiper.min.js"></script>
-<script type="text/javascript" src="../js/public.js"></script>
-
-	<script src="../js/lc_switch.js" type="text/javascript"></script>
-	<link rel="stylesheet" href="../css/lc_switch.css">
-</head>
+<#include "/common/head.html">
 <body>
 
 <!-- 内容框 -->
@@ -37,71 +9,102 @@
 	<div class="zy_content zy_vipbox">
 		<div class="vip_head mb6">
 			<div class="head pt5">
-				<i><img src="../images/common_img/woman.png"></i>
-<!--				<span>普通人才</span>-->
-				<h2>
-				<#if user??>
-					${user.nickName}
-				</#if>
-				</h2>
-				<!-- 简历公开 -->
-				<br>
-				<div align="center">
-					<span style="font-size: 20px;font-weight: bold;display:inline-block">简历</span>
-					<span style="font-size: 20px;font-weight: bold;display:inline-block">
-					<#if user?? && user.resumeState == 0>
-						<input type="checkbox" name="check-1" value="4" class="lcs_check" checked="checked" autocomplete="off" />
+				<#if user.photo?? && user.photo != "">
+				<i><img src="showImg?type=photo" style="width:100px;height: 100px; border-radius:50%; background: #fff;box-shadow: 0 0 0 5px #88bde8;"></i>
+					<#else>
+						<#if user.sex == 0>
+						<img src="${request.contextPath}/images/common_img/woman.png" style="width:200px; height:200px; border-radius:50%; background: #fff;box-shadow: 0 0 0 5px #88bde8;">
 						<#else>
-						<input type="checkbox" name="check-1" value="4" class="lcs_check" autocomplete="off" />
+						<img src="${request.contextPath}/images/common_img/man.png" style="width:200px; height:200px; border-radius:50%; background: #fff;box-shadow: 0 0 0 5px #88bde8;">
 					</#if>
-					</span>
-				</div>
+				</#if>
+<!--				<i><img src="${request.contextPath}/images/common_img/woman.png"></i>-->
+<!--				<span>普通人才</span>-->
+<!--				<h2>-->
+<!--				<#if user??>-->
+<!--					${user.nickName}-->
+<!--				</#if>-->
+<!--				</h2>-->
+				<!-- 简历公开 -->
+		<h2>${user.nickName}</h2>
+		<!-- 是否找工作 -->
+		<div class="state rel"><em class="on" id="work-on">公开简历</em><em id="work-off">隐藏简历</em><b></b></div>
+		<script type="text/javascript">
+			var global_state = '${user.resumeState}';
+			var state = '0';
+			$(function(){
+				$(".state em").click(function(){
+					var n=$(this).index()*$(".state b").width();
+					$(this).addClass("on");
+					$(this).siblings().removeClass("on");
+					$(".state b").stop().animate({left:n},150)
+					if(this.innerHTML=='公开简历'){
+						state='0';
+					}else{
+						state='1';
+					}
 
-			<script type="text/javascript">
-				$(document).ready(function(e) {
-					$('input').lc_switch();
-					$('body').delegate('.lcs_check', 'lcs-statuschange', function() {
-						var state = ($(this).is(':checked')) ? '0' : '1';
-						$.ajax({
-							url:"changeResumeState?resumeState="+state,
-							type:"get",
-							dataType:"json",
-							success:function (data) {
-								//console.log('field changed status: '+ status );
-								console.log(data.msg);
+						if(state != global_state){
+							global_state = state;
+							if (state == '0'){
+								toast({time: 2000, content: "简历状态：公开"})
+							}else {
+								toast({time: 2000, content: "简历状态：关闭"})
 							}
-						})
 
-					});
-					// $('body').delegate('.lcs_check', 'lcs-on', function() {
-					// 	console.log('field is checked');
-					// });
-					// $('body').delegate('.lcs_check', 'lcs-off', function() {
-					// 	console.log('field is unchecked');
-					// });
-				});
-			</script>
+
+							$.ajax({
+								url:"openResume?state="+state,
+								type:"get",
+								dataType:"json",
+								success:function (data) {
+									//console.log('field changed status: '+ status );
+									// if (data.code == 0){
+									// 	toast({time: 2000, content: "简历状态：公开"})
+									// }else {
+									// 	toast({time: 2000, content:"简历状态：关闭"})
+									// }
+								}
+							})
+						}
+
+				})
+			})
+		</script>
+		<script type="text/javascript">
+			$(function () {
+				<#if user.resumeState == 1>
+					document.getElementById("work-off").click();
+				</#if>
+			})
+		</script>
 
 			</div>
 			<a href="logout"><div class="exit" >退出</div></a>
 		</div>
 		<div class="vip_menu">
 			<ul class="mb6">
+
+				<#if user?? && user.type == 1>
+					<li>
+						<a href="staffInfo">
+							<img src="../images/common_img/vip_icon_01.png">
+							<span>资料设置</span>
+						</a>
+					</li>
+				</#if>
+				<#if user?? && user.type == 2>
+					<li>
+						<a href="">
+							<img src="../images/common_img/vip_icon_01.png">
+							<span>资料设置</span>
+						</a>
+					</li>
+				</#if>
+
 				<li>
-					<a href="user_info.html">
-						<img src="../images/common_img/vip_icon_01.png">
-						<span>资料设置</span>
-					</a>
-				</li>
-				<li>
-					<a href="user_mypart.html">
-						<img src="../images/common_img/vip_icon_02_1.png">
-						<span>我的合伙信息</span>
-					</a>
-				</li>
-				<li>
-					<a href="user_myresume.html">
-						<img src="../images/common_img/vip_icon_02.png">
+					<a href="resume">
+						<img src="../images/common_img/vip_icon_02.png" id="jl">
 						<span>我的简历</span>
 					</a>
 				</li>
@@ -131,15 +134,7 @@
 					</a>
 				</li>
 			</ul>
-			<ul>
-				<li>
-					<a href="../web_company/school.html">
-						<img src="../images/common_img/vip_icon_07.png">
-						<span>我的人才库</span>
-						<em class="n r g9">需开通入驻</em>
-					</a>
-				</li>
-			</ul>
+
 		</div>
 	</div>
 	
@@ -174,7 +169,5 @@
 
 
 </body>
-<script>
 
-</script>
 </html>
