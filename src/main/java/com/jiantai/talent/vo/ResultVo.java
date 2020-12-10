@@ -3,7 +3,7 @@ package com.jiantai.talent.vo;
 import java.util.List;
 
 /**
- * 封装数据回显前端的对象
+ * 封装数据回显前端的对象,code = 0正常，默认1,异常
  */
 public class ResultVo {
     private Integer code = 1;//0=正常，1=异常

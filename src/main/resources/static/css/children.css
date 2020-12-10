@@ -352,7 +352,7 @@
 /*我的简历*/
 .vip_user_resume{padding-bottom: .9rem;}
 .vip_user_resume ul{padding-bottom: .2rem; background-color: #fff;}
-.vip_user_resume ul li{ border-bottom: #ddd solid 1px; padding:2%;overflow: hidden; }
+.vip_user_resume ul li{ border-bottom: #f2b300 solid 1px; padding:2%;overflow: hidden; }
 .vip_user_resume ul li dl{ float: left; }
 .vip_user_resume ul li dl dt{ font-size:.3rem; color: #333; line-height: 160%; margin:.1rem auto .24rem; }
 .vip_user_resume ul li dl dd{font-size:.22rem; color: #999;}

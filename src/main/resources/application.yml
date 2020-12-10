@@ -43,6 +43,7 @@ server:
     context-path: /talent
     session:
       timeout: 1440 #session过期时间--单位分钟 -- 1天
+
 #  tomcat:
 #    accesslog:
 #      enabled: true
@@ -53,7 +54,7 @@ server:
 #         jiantai %u %t "%r" %s %b %D
 #    basedir: D:/logs/accesslog.log
 mybatis:
-  type-aliases-package: com.jiantai.entity
+  type-aliases-package: com.jiantai.talent.entity
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     ##开启驼峰映射

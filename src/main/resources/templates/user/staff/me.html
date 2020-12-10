@@ -9,24 +9,21 @@
 	<div class="zy_content zy_vipbox">
 		<div class="vip_head mb6">
 			<div class="head pt5">
-				<#if user.photo?? && user.photo != "">
-				<i><img src="showImg?type=photo" style="width:100px;height: 100px; border-radius:50%; background: #fff;box-shadow: 0 0 0 5px #88bde8;"></i>
+				<#if info.photo?? && info.photo != "">
+				<i><img src="img?role=staff" style="width:100px;height: 100px; border-radius:50%; background: #fff;box-shadow: 0 0 0 5px #88bde8;"></i>
 					<#else>
-						<#if user.sex == 0>
-						<img src="${request.contextPath}/images/common_img/woman.png" style="width:200px; height:200px; border-radius:50%; background: #fff;box-shadow: 0 0 0 5px #88bde8;">
+						<#if info.sex == 0>
+							<i><img src="${request.contextPath}/images/common_img/woman.png" style="width:100px;height: 100px; border-radius:50%; background: #fff;box-shadow: 0 0 0 5px #88bde8;"></i>
+						<#elseif info.sex == 1>
+							<i><img src="${request.contextPath}/images/common_img/man.png" style="width:100px;height: 100px; border-radius:50%; background: #fff;box-shadow: 0 0 0 5px #88bde8;"></i>
 						<#else>
-						<img src="${request.contextPath}/images/common_img/man.png" style="width:200px; height:200px; border-radius:50%; background: #fff;box-shadow: 0 0 0 5px #88bde8;">
+							<i><img src="${request.contextPath}/images/common_img/default.png" style="width:100px;height: 100px; border-radius:50%; background: #fff;box-shadow: 0 0 0 5px #88bde8;"></i>
 					</#if>
 				</#if>
-<!--				<i><img src="${request.contextPath}/images/common_img/woman.png"></i>-->
-<!--				<span>普通人才</span>-->
-<!--				<h2>-->
-<!--				<#if user??>-->
-<!--					${user.nickName}-->
-<!--				</#if>-->
-<!--				</h2>-->
-				<!-- 简历公开 -->
-		<h2>${user.nickName}</h2>
+				<br>
+				<br>
+
+
 		<!-- 是否找工作 -->
 		<div class="state rel"><em class="on" id="work-on">公开简历</em><em id="work-off">隐藏简历</em><b></b></div>
 		<script type="text/javascript">
@@ -54,7 +51,7 @@
 
 
 							$.ajax({
-								url:"openResume?state="+state,
+								url:"${request.contextPath}/staff/show?state="+state,
 								type:"get",
 								dataType:"json",
 								success:function (data) {
@@ -84,26 +81,16 @@
 		</div>
 		<div class="vip_menu">
 			<ul class="mb6">
+					<li>
+						<a href="${request.contextPath}/staff/info">
+							<img src="../images/common_img/vip_icon_01.png">
+							<span>资料设置</span>
+						</a>
+					</li>
 
-				<#if user?? && user.type == 1>
-					<li>
-						<a href="staffInfo">
-							<img src="../images/common_img/vip_icon_01.png">
-							<span>资料设置</span>
-						</a>
-					</li>
-				</#if>
-				<#if user?? && user.type == 2>
-					<li>
-						<a href="">
-							<img src="../images/common_img/vip_icon_01.png">
-							<span>资料设置</span>
-						</a>
-					</li>
-				</#if>
 
 				<li>
-					<a href="resume">
+					<a href="${request.contextPath}/staff/resume">
 						<img src="../images/common_img/vip_icon_02.png" id="jl">
 						<span>我的简历</span>
 					</a>

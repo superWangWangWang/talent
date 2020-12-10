@@ -53,72 +53,39 @@
 
 <div class="module-content">
 	<!--banner图-->
-	<div class="swiper-container banner">
-		<ul class="swiper-wrapper">
-			<li class="swiper-slide">
-				<img src="${request.contextPath}/images/banner01.jpg">
-			</li>
-			<li class="swiper-slide">
-				<img src="${request.contextPath}/images/banner01.jpg">
-			</li>
-			<li class="swiper-slide">
-				<img src="${request.contextPath}/images/banner01.jpg">
-			</li>
-		</ul>
-		<div class="swiper-pagination sp01"></div>
-		<script>
-			var swiper = new Swiper('.banner', {
-				pagination: '.sp01',
-				paginationClickable: true,
-				autoplay:"3000",
-				loop:"ture",
-				speed:500,
-				autoplayDisableOnInteraction : false,
-			});
-		</script>
-	</div>
-
-	<!-- 图标导航icon -->
-	<div class="swiper-container nav_iconbox">
-		<div class="swiper-wrapper">
-			<!-- 每个ul有8个li，不能多于8个 -->
-			<ul class="swiper-slide">
-				<li>
-					<a href="job.html">
-						<img src="${request.contextPath}/images/person_img/icon01.png">
-						<span>找工作</span>
-					</a>
-				</li>
-<!--				<li>-->
-<!--					<a href="partner.html">-->
-<!--						<img src="${request.contextPath}/images/icon02.png">-->
-<!--						<span>合伙创业</span>-->
-<!--					</a>-->
-<!--				</li>-->
-				<li>
-					<a href="train.html">
-						<img src="${request.contextPath}/images/person_img/icon03.png">
-						<span>提升培训</span>
-					</a>
-				</li>
-			</ul>
-		</div>
-		<script>
-			var swiper = new Swiper('.nav_iconbox', {
-				speed:500,
-				autoplayDisableOnInteraction : false,
-			});
-		</script>
-	</div>
+<!--	<div class="swiper-container banner">-->
+<!--		<ul class="swiper-wrapper">-->
+<!--			<li class="swiper-slide">-->
+<!--				<img src="${request.contextPath}/images/banner01.jpg">-->
+<!--			</li>-->
+<!--			<li class="swiper-slide">-->
+<!--				<img src="${request.contextPath}/images/banner01.jpg">-->
+<!--			</li>-->
+<!--			<li class="swiper-slide">-->
+<!--				<img src="${request.contextPath}/images/banner01.jpg">-->
+<!--			</li>-->
+<!--		</ul>-->
+<!--		<div class="swiper-pagination sp01"></div>-->
+<!--		<script>-->
+<!--			var swiper = new Swiper('.banner', {-->
+<!--				pagination: '.sp01',-->
+<!--				paginationClickable: true,-->
+<!--				autoplay:"3000",-->
+<!--				loop:"ture",-->
+<!--				speed:500,-->
+<!--				autoplayDisableOnInteraction : false,-->
+<!--			});-->
+<!--		</script>-->
+<!--	</div>-->
 
 	<!-- 公告信息 -->
 	<div class="news_sj_dxs_box bgwh mb6">
 		<div class="scrollnews">
 			<span><img src="${request.contextPath}/images/news_tit.png"></span>
 			<ul>
-				<li><a href="../web_other/news_xq.html">人和职业免费技能培训专业火热报名中！</a></li>
-				<li><a href="../web_other/news_xq.html">认真学习十九大精神，争取贯彻落实习总书记讲话</a></li>
-				<li><a href="../web_other/news_xq.html">杨校长在2019春季开学典礼上致辞</a></li>
+				<#list noticeList as l>
+				<li><a href="../web_other/news_xq.html">${l.title}</a></li>
+				</#list>
 			</ul>
 			<span class="r"><a href="../web_other/newslist.html">更多></a></span>
 			<script type="text/javascript">
@@ -149,149 +116,109 @@
 			</script>
 		</div>
 	</div>
-
-	<!-- 推荐培训 -->
-	<div class="tuij_box bgwh mb6">
-		<div class="title">
-			<h2><img src="${request.contextPath}/images/person_img/icon_tjpx.png" /><span>推荐培训</span></h2>
-			<a href="train.html">查看更多></a>
-		</div>
-		<ul>
-			<li>
-				<a href="train_xq.html">
-					<i class="l"><img src="${request.contextPath}/images/pic01.jpg" /></i>
-					<dl class="l">
-						<dt>公共营养师</dt>
-						<dd class="ge04">理论与操作</dd>
-						<dd class="g6">报名人数：<span class="gr">299</span></dd>
-					</dl>
-					<span class="ge04 abs">优惠</span>
-				</a>
-			</li>
-			<li>
-				<a href="train_xq.html">
-					<i class="l"><img src="${request.contextPath}/images/pic04.jpg" /></i>
-					<dl class="l">
-						<dt>插花师</dt>
-						<dd class="ge04">理论与操作</dd>
-						<dd class="g6">报名人数：<span class="gr">99</span></dd>
-					</dl>
-					<span class="ge04 abs">免费</span>
-				</a>
-			</li>
-			<li>
-				<a href="train_xq.html">
-					<i class="l"><img src="${request.contextPath}/images/pic05.jpg" /></i>
-					<dl class="l">
-						<dt>环境产业水治理</dt>
-						<dd class="ge04">视频学习+理论与操作</dd>
-						<dd class="g6">报名人数：<span class="gr">29</span></dd>
-					</dl>
-					<span class="ge04 abs">优惠</span>
-				</a>
-			</li>
-		</ul>
-	</div>
-
-	<!-- 推荐培训 -->
+	<!-- 职位 -->
 	<div class="tuij_gz bgwh mb6">
 		<div class="title">
-			<h2><img src="${request.contextPath}/images/person_img/icon_tjgz.png" /><span>推荐工作</span></h2>
-			<a class="change"><img src="${request.contextPath}/images/refresh.png" />换一批</a>
+			<h2><img src="${request.contextPath}/images/person_img/icon_tjgz.png" /><span style="color: #5f90ff">最新发布</span></h2>
+<!--			<a class="change"><img src="${request.contextPath}/images/refresh.png" />换一批</a>-->
 		</div>
 		<ul>
-			<li>
-				<a href="work_xq.html">
-					<div class="job_tit fix">
-						<h2 class="l pct80">招聘食堂高级营养师</h2>
-						<span class="r">20小时前</span>
-					</div>
-					<div class="job_money">
-						<span>待遇：<em class="gr n">面议</em></span>
-					</div>
-					<div class="job_fuli fix">
-						<p class="l pct70">
-							<em>包吃住</em><em>餐补</em><em>加班补助</em>
-						</p>
-						<span class="r">浏览次数：235</span>
-					</div>
-				</a>
-			</li>
-			<li>
-				<a href="work_xq.html">
-					<div class="job_tit fix">
-						<h2 class="l pct80">高薪招聘贵阳南明育婴师</h2>
-						<span class="r">昨天</span>
-					</div>
-					<div class="job_money">
-						<span>待遇：<em class="gr n">5000~8000元</em></span>
-					</div>
-					<div class="job_fuli fix">
-						<p class="l pct70">
-							<em>包吃住</em><em>餐补</em>
-						</p>
-						<span class="r">浏览次数：125</span>
-					</div>
-				</a>
-			</li>
-			<li>
-				<a href="work_xq.html">
-					<div class="job_tit fix">
-						<h2 class="l pct80">建筑工人</h2>
-						<span class="r">03-25</span>
-					</div>
-					<div class="job_money">
-						<span>待遇：<em class="gr n">面议</em></span>
-					</div>
-					<div class="job_fuli fix">
-						<p class="l pct70">
-							<em>包吃住</em><em>餐补</em><em>加班补助</em>
-						</p>
-						<span class="r">浏览次数：35</span>
-					</div>
-				</a>
-			</li>
-			<li>
-				<a href="work_xq.html">
-					<div class="job_tit fix">
-						<h2 class="l pct80">观山湖高新区招聘大数据呼叫员</h2>
-						<span class="r">03-25</span>
-					</div>
-					<div class="job_money">
-						<span>待遇：<em class="gr n">3000~5000元</em></span>
-					</div>
-					<div class="job_fuli fix">
-						<p class="l pct70">
-							<em>五险</em><em>餐补</em><em>加班补助</em>
-						</p>
-						<span class="r">浏览次数：35</span>
-					</div>
-				</a>
-			</li>
-			<li>
-				<a href="work_xq.html">
-					<div class="job_tit fix">
-						<h2 class="l pct80">招聘安保人员</h2>
-						<span class="r">03-25</span>
-					</div>
-					<div class="job_money">
-						<span>待遇：<em class="gr n">2000~4000元</em></span>
-					</div>
-					<div class="job_fuli fix">
-						<p class="l pct70">
-							<em>餐补</em><em>加班补助</em>
-						</p>
-						<span class="r">浏览次数：49</span>
-					</div>
-				</a>
-			</li>
+			<#macro timeline_dt datetime>
+				<#assign ct = (.now?long-datetime?long)/1000 />
+					<#if ct gte 31104000>${(ct/31104000)?int}年前
+						<#t><#elseif ct gte 2592000>${(ct/2592000)?int}个月前
+						<#t><#elseif ct gte 86400*2>${(ct/86400)?int}天前
+						<#t><#elseif ct gte 86400>昨天
+						<#t><#elseif ct gte 3600>${(ct/3600)?int}小时前
+						<#t><#elseif ct gte 60>${(ct/60)?int}分钟前
+						<#t><#elseif ct gt 0>${ct?int}秒前
+						<#t><#else>刚刚
+					</#if>
+				</#macro>
+			<#list recruitList as l>
+				<li>
+					<a href="recruitDetail?id=${l.id}">
+						<div class="job_tit fix">
+							<h2 class="l pct80">${l.title}</h2>
+<!--							<span class="r">更新：${l.updateTime?string('yyyy-MM-dd HH:mm:ss')} </span>-->
+							<span class="r"><@timeline_dt datetime=l.updateTime/></span>
+						</div>
+						<div class="job_money">
+							<span>待遇：
+								<#list salaryList as sl>
+									<#if sl.id == l.salary >
+										<em class="gr n">${sl.name}</em>
+									</#if>
+								</#list>
+							</span>
+						</div>
+						<div class="job_fuli fix">
+							<p class="l pct70">
+								<#list welfareList as wl>
+									<#if l.welfare?index_of("[" + "${wl.name}" + "]") != -1 >
+										<em>${wl.name}</em>
+									</#if>
+								</#list>
+							</p>
+							<span class="r">浏览次数：${l.watched}</span>
+						</div>
+					</a>
+				</li>
+			</#list>
+
 		</ul>
 	</div>
+
+	<!-- 推荐培训 -->
+<!--	<div class="tuij_box bgwh mb6">-->
+<!--		<div class="title">-->
+<!--			<h2><img src="${request.contextPath}/images/person_img/icon_tjpx.png" /><span>推荐培训</span></h2>-->
+<!--			<a href="train.html">查看更多></a>-->
+<!--		</div>-->
+<!--		<ul>-->
+<!--			<li>-->
+<!--				<a href="train_xq.html">-->
+<!--					<i class="l"><img src="${request.contextPath}/images/pic01.jpg" /></i>-->
+<!--					<dl class="l">-->
+<!--						<dt>公共营养师</dt>-->
+<!--						<dd class="ge04">理论与操作</dd>-->
+<!--						<dd class="g6">报名人数：<span class="gr">299</span></dd>-->
+<!--					</dl>-->
+<!--					<span class="ge04 abs">优惠</span>-->
+<!--				</a>-->
+<!--			</li>-->
+<!--			<li>-->
+<!--				<a href="train_xq.html">-->
+<!--					<i class="l"><img src="${request.contextPath}/images/pic04.jpg" /></i>-->
+<!--					<dl class="l">-->
+<!--						<dt>插花师</dt>-->
+<!--						<dd class="ge04">理论与操作</dd>-->
+<!--						<dd class="g6">报名人数：<span class="gr">99</span></dd>-->
+<!--					</dl>-->
+<!--					<span class="ge04 abs">免费</span>-->
+<!--				</a>-->
+<!--			</li>-->
+<!--			<li>-->
+<!--				<a href="train_xq.html">-->
+<!--					<i class="l"><img src="${request.contextPath}/images/pic05.jpg" /></i>-->
+<!--					<dl class="l">-->
+<!--						<dt>环境产业水治理</dt>-->
+<!--						<dd class="ge04">视频学习+理论与操作</dd>-->
+<!--						<dd class="g6">报名人数：<span class="gr">29</span></dd>-->
+<!--					</dl>-->
+<!--					<span class="ge04 abs">优惠</span>-->
+<!--				</a>-->
+<!--			</li>-->
+<!--		</ul>-->
+<!--	</div>-->
+
+
 
 	<!-- 热门职位 -->
 	<div class="hot_work bgwh mb6">
 		<div class="title hot_tit">
-			<h2><span>热门职位</span></h2>
+<!--			<h2><img src="${request.contextPath}/images/person_img/icon_hot.png" /><span>热门职位</span>-->
+			<h2><img src="${request.contextPath}/images/person_img/icon_hot.png" /><span style="color: red">热门职位</span></h2>
 			<a href="job.html">查看更多></a>
 		</div>
 		<ul>
@@ -331,69 +258,69 @@
 		</script>
 	</div>
 
-	<!-- 热门培训 -->
-	<div class="tuij_box bgwh mb6">
-		<div class="title">
-			<h2><img src="${request.contextPath}/images/person_img/icon_hot.png" /><span>热门培训</span></h2>
-		</div>
-		<ul>
-			<li>
-				<a href="train_xq.html">
-					<i class="l"><img src="${request.contextPath}/images/pic01.jpg" /></i>
-					<dl class="l">
-						<dt>公共营养师</dt>
-						<dd class="ge04">理论与操作</dd>
-						<dd class="g6">报名人数：<span class="gr">291</span></dd>
-					</dl>
-					<span class="ge04 abs">优惠</span>
-				</a>
-			</li>
-			<li>
-				<a href="train_xq.html">
-					<i class="l"><img src="${request.contextPath}/images/pic02.jpg" /></i>
-					<dl class="l">
-						<dt>养老护理师</dt>
-						<dd class="ge04">理论与操作</dd>
-						<dd class="g6">报名人数：<span class="gr">99</span></dd>
-					</dl>
-					<span class="ge04 abs">免费</span>
-				</a>
-			</li>
-			<li>
-				<a href="train_xq.html">
-					<i class="l"><img src="${request.contextPath}/images/pic03.jpg" /></i>
-					<dl class="l">
-						<dt>育婴师</dt>
-						<dd class="ge04">理论与操作</dd>
-						<dd class="g6">报名人数：<span class="gr">27</span></dd>
-					</dl>
-					<span class="ge04 abs">免费</span>
-				</a>
-			</li>
-			<li>
-				<a href="train_xq.html">
-					<i class="l"><img src="${request.contextPath}/images/pic04.jpg" /></i>
-					<dl class="l">
-						<dt>插花师</dt>
-						<dd class="ge04">理论与操作</dd>
-						<dd class="g6">报名人数：<span class="gr">89</span></dd>
-					</dl>
-					<span class="ge04 abs">优惠</span>
-				</a>
-			</li>
-			<li>
-				<a href="train_xq.html">
-					<i class="l"><img src="${request.contextPath}/images/pic05.jpg" /></i>
-					<dl class="l">
-						<dt>环境产业水治理</dt>
-						<dd class="ge04">视频学习+理论与操作</dd>
-						<dd class="g6">报名人数：<span class="gr">29</span></dd>
-					</dl>
-					<span class="ge04 abs">免费</span>
-				</a>
-			</li>
-		</ul>
-	</div>
+<!--	&lt;!&ndash; 热门培训 &ndash;&gt;-->
+<!--	<div class="tuij_box bgwh mb6">-->
+<!--		<div class="title">-->
+<!--			<h2><img src="${request.contextPath}/images/person_img/icon_hot.png" /><span>热门培训</span></h2>-->
+<!--		</div>-->
+<!--		<ul>-->
+<!--			<li>-->
+<!--				<a href="train_xq.html">-->
+<!--					<i class="l"><img src="${request.contextPath}/images/pic01.jpg" /></i>-->
+<!--					<dl class="l">-->
+<!--						<dt>公共营养师</dt>-->
+<!--						<dd class="ge04">理论与操作</dd>-->
+<!--						<dd class="g6">报名人数：<span class="gr">291</span></dd>-->
+<!--					</dl>-->
+<!--					<span class="ge04 abs">优惠</span>-->
+<!--				</a>-->
+<!--			</li>-->
+<!--			<li>-->
+<!--				<a href="train_xq.html">-->
+<!--					<i class="l"><img src="${request.contextPath}/images/pic02.jpg" /></i>-->
+<!--					<dl class="l">-->
+<!--						<dt>养老护理师</dt>-->
+<!--						<dd class="ge04">理论与操作</dd>-->
+<!--						<dd class="g6">报名人数：<span class="gr">99</span></dd>-->
+<!--					</dl>-->
+<!--					<span class="ge04 abs">免费</span>-->
+<!--				</a>-->
+<!--			</li>-->
+<!--			<li>-->
+<!--				<a href="train_xq.html">-->
+<!--					<i class="l"><img src="${request.contextPath}/images/pic03.jpg" /></i>-->
+<!--					<dl class="l">-->
+<!--						<dt>育婴师</dt>-->
+<!--						<dd class="ge04">理论与操作</dd>-->
+<!--						<dd class="g6">报名人数：<span class="gr">27</span></dd>-->
+<!--					</dl>-->
+<!--					<span class="ge04 abs">免费</span>-->
+<!--				</a>-->
+<!--			</li>-->
+<!--			<li>-->
+<!--				<a href="train_xq.html">-->
+<!--					<i class="l"><img src="${request.contextPath}/images/pic04.jpg" /></i>-->
+<!--					<dl class="l">-->
+<!--						<dt>插花师</dt>-->
+<!--						<dd class="ge04">理论与操作</dd>-->
+<!--						<dd class="g6">报名人数：<span class="gr">89</span></dd>-->
+<!--					</dl>-->
+<!--					<span class="ge04 abs">优惠</span>-->
+<!--				</a>-->
+<!--			</li>-->
+<!--			<li>-->
+<!--				<a href="train_xq.html">-->
+<!--					<i class="l"><img src="${request.contextPath}/images/pic05.jpg" /></i>-->
+<!--					<dl class="l">-->
+<!--						<dt>环境产业水治理</dt>-->
+<!--						<dd class="ge04">视频学习+理论与操作</dd>-->
+<!--						<dd class="g6">报名人数：<span class="gr">29</span></dd>-->
+<!--					</dl>-->
+<!--					<span class="ge04 abs">免费</span>-->
+<!--				</a>-->
+<!--			</li>-->
+<!--		</ul>-->
+<!--	</div>-->
 
 	<!-- 返回顶部 -->
 	<div class="go_top">
@@ -403,11 +330,11 @@
 	<!-- 底部 -->
 	<div class="footer_box">
 		<div class="footer">
-			<h2>
-				<a href="../web_login/login.html">登录</a><!--
-			 --><a href="../web_login/register.html">注册</a><!--
-			 --><a href="../web_ruzhu/apply_index.html">同行入驻</a>
-			</h2>
+<!--			<h2>-->
+<!--				<a href="../web_login/login.html">登录</a>&lt;!&ndash;-->
+<!--			 &ndash;&gt;<a href="../web_login/register.html">注册</a>&lt;!&ndash;-->
+<!--			 &ndash;&gt;<a href="../web_ruzhu/apply_index.html">同行入驻</a>-->
+<!--			</h2>-->
 			<h3>
 				<span><a href="../web_other/about.html">关于我们</a></span>
 				<span><a href="../web_other/about.html">求职指南</a></span>
@@ -415,7 +342,7 @@
 				<span><a href="../web_other/about.html">免责声明</a></span>
 			</h3>
 			<div class="txt">
-				<p>贵公网安备 11010602030054</p>
+				<p>©2020 建泰人才</p>
 			</div>
 		</div>
 	</div>
@@ -428,31 +355,31 @@
 		<a><img src="${request.contextPath}/images/back_jt.png"><span>返回</span></a>
 		<div>
 			<form>
-				<select>
-					<option>工作</option>
-					<option>合伙</option>
-				</select>
+<!--				<select>-->
+<!--					<option>工作</option>-->
+<!--					<option>合伙</option>-->
+<!--				</select>-->
 				<input type="text" name="" placeholder="请输入关键词搜索"><!--
 			 --><button type="submit"><img src="${request.contextPath}/images/icon_search.png"></button>
 			</form>
 		</div>
 	</div>
-	<div class="search_txt">
-		<h2>大家都在搜</h2>
-		<ul>
-			<li><a href="job.html">公告营养师</a></li>
-			<li><a href="job.html">园艺设计</a></li>
-			<li><a href="job.html">建筑设计</a></li>
-			<li><a href="job.html">育婴师</a></li>
-			<li><a href="job.html">养护师</a></li>
-			<li><a href="job.html">平面设计</a></li>
-			<li><a href="job.html">web工程师</a></li>
-			<li><a href="job.html">学前教育</a></li>
-			<li><a href="job.html">环保工程师</a></li>
-			<li><a href="job.html">母婴护理师</a></li>
-			<li><a href="job.html">保育员</a></li>
-		</ul>
-	</div>
+<!--	<div class="search_txt">-->
+<!--		<h2>输入想要搜索的关键词</h2>-->
+<!--		<ul>-->
+<!--			<li><a href="job.html">公告营养师</a></li>-->
+<!--			<li><a href="job.html">园艺设计</a></li>-->
+<!--			<li><a href="job.html">建筑设计</a></li>-->
+<!--			<li><a href="job.html">育婴师</a></li>-->
+<!--			<li><a href="job.html">养护师</a></li>-->
+<!--			<li><a href="job.html">平面设计</a></li>-->
+<!--			<li><a href="job.html">web工程师</a></li>-->
+<!--			<li><a href="job.html">学前教育</a></li>-->
+<!--			<li><a href="job.html">环保工程师</a></li>-->
+<!--			<li><a href="job.html">母婴护理师</a></li>-->
+<!--			<li><a href="job.html">保育员</a></li>-->
+<!--		</ul>-->
+<!--	</div>-->
 </div>
 <script type="text/javascript">
 	$(function(){
@@ -464,12 +391,13 @@
 				}
 		)
 		$(".search_bomb_box .search_top>a").mousedown(
-				function(){
+				function() {
 					$(".search_bomb_box").hide()
 					$(".module-layer").show()
 					$(".module-content").show()
 				}
 		)
+		alert("项目建设中。。。功能并未完善。。。")
 	})
 </script>
 

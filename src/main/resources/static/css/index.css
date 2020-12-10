@@ -68,6 +68,7 @@ html{ background-color: #f5f5f5; }
 	top: 0;
 	left: 0;
 	z-index: 100000;
+
 }
 .module-layer-content{
 	position: relative;
@@ -75,6 +76,7 @@ html{ background-color: #f5f5f5; }
 	max-width: 640px;
 	width: 100%;
 	margin: 0 auto;
+	/*background-color: #00F7DE;*/
 }
 .module-layer-bg{
 	width: 100%;
@@ -83,10 +85,11 @@ html{ background-color: #f5f5f5; }
 	top: 0;
 	left: 0;
 	z-index: -1;
-	background: -webkit-linear-gradient(rgba(0,0,0,.6),transparent 80%);
-    background: -o-linear-gradient(rgba(0,0,0,.6),transparent 80%);
-    background: -moz-linear-gradient(rgba(0,0,0,.6),transparent 80%);
-    background: linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,0) 80%);
+	background-color: #f2b300;
+	/*background: -webkit-linear-gradient(rgba(0,0,0,.6),transparent 80%);*/
+    /*background: -o-linear-gradient(rgba(0,0,0,.6),transparent 80%);*/
+    /*background: -moz-linear-gradient(rgba(0,0,0,.6),transparent 80%);*/
+    /*background: linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,0) 80%);*/
 }
 .layer-head-name{
 	height: 0.84rem;
@@ -203,7 +206,7 @@ html{ background-color: #f5f5f5; }
 .nav_iconbox ul li a span{ display: block; white-space: nowrap; overflow: hidden; color: #333; line-height: 180%; font-size: .24rem;}
 
 /* <!-- 公告信息 -->*/
-.news_sj_dxs_box .scrollnews{overflow: hidden; padding:0 2%; height: .72rem;}
+.news_sj_dxs_box .scrollnews{overflow: hidden; padding:0 2%; height: .72rem;margin-top:  0.84rem}
 .news_sj_dxs_box .scrollnews span:first-child{float: left; width: .84rem; margin-top: .16rem;}
 .news_sj_dxs_box .scrollnews span:first-child img{ width: 100%; display: block; }
 .news_sj_dxs_box .scrollnews ul{float: left; width: 73%;height: .72rem;padding-left: 2%; overflow: hidden; }
@@ -245,7 +248,7 @@ html{ background-color: #f5f5f5; }
 }
 
 /*热门职位*/
-.hot_tit h2 span{ font-size: .3rem; color: #5589ff;border-left: #5589ff solid 3px; padding-left: .3em;padding-top: 1px;}
+.hot_tit h2 span{ font-size: .3rem; color: #5589ff; padding-top: 1px;}
 .hot_work ul{ overflow: hidden;border-top:#eee solid 1px; margin: 0 2%; padding:2% 0 3%; }
 .hot_work ul li{ float: left; font-size: .26rem; margin:2% 4% 2% 0; line-height: 120%;}
 .hot_work ul li a{ color: #333; }
@@ -321,7 +324,7 @@ html{ background-color: #f5f5f5; }
 
 /*search_bomb_box搜索弹框*/
 .search_bomb_box{
-	background-color: #fff; height: 100%; 
+	background-color: #fff; height: 100%;
 	display: none;
 	max-width: 640px;
 	width: 100%;
@@ -350,7 +353,8 @@ html{ background-color: #f5f5f5; }
     width: 16%;
     line-height: 180%;
 }
-.sy_search_top div input{ width: 68%; text-indent: 0; }
+/*.sy_search_top div input{ width: 68%; text-indent: 0; }*/
+.sy_search_top div input{ width: 90%; text-indent: 0; }
 .sy_search_top div button{ width:10%; }
 .sy_search_top div button img{width: 62%; margin:0 auto 0 15%; }
 

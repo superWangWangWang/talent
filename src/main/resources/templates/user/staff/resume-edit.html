@@ -16,10 +16,12 @@
 <!-- 内容框 -->
 <div class="zy_module-content zy_vip_conbox">
 	<div class="vip_user_info_mima vip_user_createbox">
+
 		<form id="data_form">
-			<div class="headpic mb6 bgwh">
-				<i><img src="../images/common_img/woman.png"/></i>
-			</div>
+<!--			<div class="headpic mb6 bgwh">-->
+<!--				<i><img src="../images/common_img/woman.png"/></i>-->
+<!--			</div>-->
+
 			<div class="write bgwh">
 				<input hidden="hidden" type="text" name="id" value="${resumeInfo.id}">
 				<div class="form_line">
@@ -41,11 +43,13 @@
 				<div class="form_line bbd xzbox">
 					<span>学历</span>
 					<select name="education">
-						<#list educationList as el>
-							<#if resumeInfo.education == el.id>
-								<option value="${el.id}" selected="selected">${el.name}</option>
-							<#else>
-								<option value="${el.id}">${el.name}</option>
+						<#list educationList as l>
+							<#if l.name != '无要求'>
+								<#if resumeInfo.education == l.id>
+									<option value="${l.id}" selected="selected">${l.name}</option>
+								<#else>
+									<option value="${l.id}">${l.name}</option>
+								</#if>
 							</#if>
 						</#list>
 					</select>
@@ -56,49 +60,26 @@
 				<div class="form_line bbd xzbox">
 					<span>工作经验</span>
 					<select name="experience">
-						<#list experienceList as el>
-							<#if resumeInfo.experience == el.id>
-								<option value="${el.id}" selected="selected">${el.name}</option>
-							<#else>
-								<option value="${el.id}">${el.name}</option>
+						<#list experienceList as l>
+							<#if l.name != '无要求'>
+								<#if resumeInfo.experience == l.id>
+									<option value="${l.id}" selected="selected">${l.name}</option>
+								<#else>
+									<option value="${l.id}">${l.name}</option>
+								</#if>
 							</#if>
 						</#list>
 					</select>
 				</div>
-				<div class="form_line bbd xzbox">
-					<span>期望月薪</span>
-					<select name="salary">
-						<#list salaryList as list>
 
-<!--								<option value="${list.id}">${list.min}-${list.max}</option>-->
-
-								<#if list.min == 0>
-
-									<#if list.id == resumeInfo.salary>
-										<option value="${list.id}" selected="selected">${list.max}以下</option>
-									<#else>
-										<option value="${list.id}">${list.max}以下</option>
-									</#if>
-								<#elseif list.max == 100000000>
-
-									<#if list.id == resumeInfo.salary>
-										<option value="${list.id}" selected="selected">${list.min}以上</option>
-									<#else>
-										<option value="${list.id}">${list.min}以上</option>
-									</#if>
-								<#else>
-
-									<#if list.id == resumeInfo.salary>
-										<option value="${list.id}" selected="selected">${list.min}-${list.max}</option>
-									<#else>
-										<option value="${list.id}">${list.min}-${list.max}</option>
-									</#if>
-								</#if>
-
-
-						</#list>
-					</select>
-				</div>
+<div class="form_line bbd xzbox">
+	<span>期望月薪</span>
+	<select name="salary" id="salary">
+		<#list salaryList as l>
+		<option value="${l.id}">${l.name}</option>
+	</#list>
+	</select>
+</div>
 				<div class="form_line tel"><label><span>联系电话</span><input type="text" name="phoneNumber" value="${resumeInfo.phoneNumber}"></label></div>
 				<div class="form_line">
 					<label><span>工作经历</span><textarea name="workExperience">${resumeInfo.workExperience}</textarea></label>

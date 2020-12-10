@@ -1,16 +1,12 @@
 package com.jiantai.talent.service.serviceImpl;
 
-import com.jiantai.talent.entity.DataEntity;
-import com.jiantai.talent.entity.Resume;
-import com.jiantai.talent.entity.StaffInfo;
-import com.jiantai.talent.entity.User;
+import com.jiantai.talent.entity.*;
 import com.jiantai.talent.mapper.UserMapper;
 import com.jiantai.talent.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -18,38 +14,58 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public User findUser(String account) {
-        return userMapper.findUser(account);
+    public User findUserByAccount(String account) {
+        return userMapper.findUserByAccount(account);
     }
 
     @Override
-    public void register(User user) {
-        userMapper.register(user);
+    public User findUserById(Integer id) {
+        return userMapper.findUserById(id);
     }
 
     @Override
-    public void addUserNickName(User user) {
-        userMapper.addUserNickName(user);
+    public void updateUser(User user) {
+        userMapper.updateUser(user);
     }
 
     @Override
-    public void updateResumeState(User user) {
-        userMapper.updateResumeState(user);
+    public void addUser(User user) {
+        userMapper.addUser(user);
     }
 
     @Override
-    public List<DataEntity> getEducation() {
+    public StaffInfo findStaffInfoByUid(Integer uid) {
+        return userMapper.findStaffInfoByUid(uid);
+    }
+
+    @Override
+    public void addStaffInfo(User user) {
+        userMapper.addStaffInfo(user);
+    }
+
+    @Override
+    public void updateStaffInfo(StaffInfo staffInfo) {
+        userMapper.updateStaffInfo(staffInfo);
+    }
+
+    @Override
+    public List<Education> getEducation() {
         return userMapper.getEducation();
     }
 
     @Override
-    public List<DataEntity> getExperience() {
+    public List<Experience> getExperience() {
         return userMapper.getExperience();
     }
 
     @Override
-    public List<DataEntity> getSalary() {
+    public List<Salary> getSalary() {
         return userMapper.getSalary();
+    }
+
+    @Override
+    public List<Resume> findResume(Integer uid) {
+        return userMapper.findResume(uid);
     }
 
     @Override
@@ -58,13 +74,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<Resume> findResume(Integer u_id) {
-        return userMapper.findResume(u_id);
-    }
-
-    @Override
-    public void deleteResume(String id, String u_id) {
-        userMapper.deleteResume(id,u_id);
+    public void deleteResume(Resume resume) {
+        userMapper.deleteResume(resume);
     }
 
     @Override
@@ -73,17 +84,47 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addStaffPhoto(User user) {
-        userMapper.addStaffPhoto(user);
+    public BossInfo findBossInfoByUid(User user) {
+        return userMapper.findBossInfoByUid(user);
     }
 
     @Override
-    public StaffInfo getStaffInfoByUid(Integer uid) {
-        return userMapper.getStaffInfoByUid(uid);
+    public void updateBossInfo(BossInfo bossInfo) {
+        userMapper.updateBossInfo(bossInfo);
     }
 
     @Override
-    public void updateStaffInfo(StaffInfo staffInfo) {
-        userMapper.updateStaffInfo(staffInfo);
+    public List<Welfare> getWelfare() {
+        return userMapper.getWelfare();
+    }
+
+    @Override
+    public List<Recruit> getRecruit() {
+        return userMapper.getRecruit();
+    }
+
+    @Override
+    public void addRecruit(Recruit recruit) {
+        userMapper.addRecruit(recruit);
+    }
+
+    @Override
+    public List<Recruit> findRecruitByUid(User user) {
+        return userMapper.findRecruitByUid(user);
+    }
+
+    @Override
+    public void updateRecruit(Recruit recruit) {
+        userMapper.updateRecruit(recruit);
+    }
+
+    @Override
+    public Recruit findRecruitById(Recruit recruit) {
+        return userMapper.findRecruitById(recruit);
+    }
+
+    @Override
+    public List<Notice> getNotice() {
+        return userMapper.getNotice();
     }
 }

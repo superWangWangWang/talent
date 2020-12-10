@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<#include "/common/head.html">
+<body>
+
+<header class="zy_search_top_box scroll_fix">
+    <div class="zy_title_top fix">
+        <div class="one" href="javascript:" onclick="history.back();"><img src="../images/back_jt.png"><span>返回</span></div>
+        <h1>发布招聘职位</h1>
+
+    </div>
+</header>
+
+<!-- 占位框 -->
+<div class="top_zhanwei_box"></div>
+
+<!-- 内容框 -->
+<div class="zy_module-content zy_vip_conbox">
+    <div class="zy_vip_scbox zy_vip_myfabu bgwh">
+
+        <div class="sc_list vip_user_info_mima vip_user_createbox">
+            <!-- 发布职位招聘 -->
+            <div class="list">
+                <form id="form">
+                    <div class="write">
+                        <div class="form_line">
+                            <label><span>招聘标题</span><input type="text" name="title" placeholder="请输入招聘标题"></label>
+                        </div>
+                        <div class="form_line">
+                            <label><span>招聘岗位</span><input type="text" name="job" placeholder="请输入招聘岗位"></label>
+                        </div>
+
+                        <div class="form_line bbd xzbox">
+                            <span>薪资待遇</span>
+                            <select name="salary">
+                                <#list salaryList as l>
+                                <option value="${l.id}">${l.name}</option>
+                                </#list>
+                            </select>
+                        </div>
+                        <div class="form_line">
+                            <label><span>招聘人数</span><input type="text" name="number" placeholder="请输入招聘人数"></label>
+                        </div>
+                        <div class="form_line bbd xzbox">
+                            <span>学历要求</span>
+                            <select name="education">
+<!--                                <option>请选择学历</option>-->
+                                <#list educationList as l>
+                                <option value="${l.id}">${l.name}</option>
+                                </#list>
+                            </select>
+                        </div>
+
+                        <div class="form_line bbd xzbox">
+                            <span>经验要求</span>
+                            <select name="experience">
+                                <#list experienceList as l>
+                                     <option value="${l.id}">${l.name}</option>
+                                 </#list>
+                            </select>
+                        </div>
+                        <div class="form_line">
+                            <label><span>工作地址</span><input type="text" name="address" placeholder="请输入工作地址"></label>
+                        </div>
+                        <div class="form_line" id="tip">
+                            <label>
+                                <span>福利待遇</span>
+                                <ul>
+                                    <#list welfareList as l>
+                                    <li>${l.name}</li>
+                                    </#list>
+                                </ul>
+                            </label>
+                            <script type="text/javascript">
+                                $(function(){
+                                    $("#tip ul li").mousedown(function(){
+                                        if ($(this).hasClass("cur")) {
+                                            //取消选择
+                                            var welfare_new = "[" + $(this).text() + "]";
+                                            var welfare_old = document.getElementById("welfare").innerText;
+
+                                            if (welfare_new == welfare_old){//1|23|11|1231|    1|123
+                                                document.getElementById("welfare").innerText = "";
+                                            }else {
+                                                welfare_old = welfare_old.replace(welfare_new,"");
+
+                                                document.getElementById("welfare").innerText = welfare_old;
+                                            }
+                                            $(this).removeClass("cur");
+                                        }else{
+                                            //选择
+                                            var welfare_new ="[" + $(this).text() + "]";
+                                            var welfare_old = document.getElementById("welfare").innerText;
+                                            if (welfare_old == ""){
+                                                document.getElementById("welfare").innerText = welfare_new;
+                                            }else {
+                                                document.getElementById("welfare").innerText = welfare_old + welfare_new;
+                                            }
+                                            $(this).addClass("cur");
+                                            //console.log($(this).text())
+                                        }
+                                    })
+                                })
+                            </script>
+                        </div>
+                        <div id="welfare" hidden="hidden"></div>
+                        <div class="form_line">
+                            <label><span>岗位职责</span><textarea name="work" placeholder="请输入工作内容及职位要求"></textarea></label>
+                        </div>
+                        <div class="form_line">
+                            <label><span>联系人</span><input type="text" name="contact" placeholder="请输入联系人"></label>
+                        </div>
+                        <div class="form_line">
+                            <label><span>联系电话</span><input type="text" name="telephone" placeholder="请输入联系电话"></label>
+                        </div>
+                        <button class="zy_butn bord_3" type="button" onclick="publish()">立即发布</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+<script type="text/javascript">
+    $(function(){
+        $(".sc_list .list").hide().first().show();
+        $(".zy_vip_scbox .tit span").mousedown(function(){
+            var n=$(this).index();
+            var m=$(".sc_line").width();
+            $(".sc_line").stop().animate({left:m*n},300);
+            $(this).addClass("cur");
+            $(this).siblings().removeClass("cur");
+            $(".sc_list .list").hide().eq(n).show();
+        })
+    })
+</script>
+<script>
+    function publish() {
+        $.ajax({
+            url:"addRecruit",
+            dataType:"json",
+            type:"post",
+            data:$.param({welfare: document.getElementById("welfare").innerText}) + "&" + $("#form").serialize(),
+            success:function (data) {
+                if (data.code == 0){
+                    history.back();
+                }else {
+                    toast({time: 2000, content: data.msg})
+                }
+            }
+        })
+    }
+
+</script>
+</html>

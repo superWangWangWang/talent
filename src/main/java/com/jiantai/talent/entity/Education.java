@@ -1,18 +1,14 @@
 package com.jiantai.talent.entity;
 
-public class DataEntity {
+public class Education {
     private Integer id;
     private String name;
-    private Integer min;
-    private Integer max;
 
     @Override
     public String toString() {
-        return "Data{" +
+        return "Education{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", min=" + min +
-                ", max=" + max +
                 '}';
     }
 
@@ -30,21 +26,5 @@ public class DataEntity {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Integer getMin() {
-        return min;
-    }
-
-    public void setMin(Integer min) {
-        this.min = min;
-    }
-
-    public Integer getMax() {
-        return max;
-    }
-
-    public void setMax(Integer max) {
-        this.max = max;
     }
 }

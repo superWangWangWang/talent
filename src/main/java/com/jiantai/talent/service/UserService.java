@@ -1,29 +1,33 @@
 package com.jiantai.talent.service;
 
 
-import com.jiantai.talent.entity.DataEntity;
-import com.jiantai.talent.entity.Resume;
-import com.jiantai.talent.entity.StaffInfo;
-import com.jiantai.talent.entity.User;
-import org.apache.ibatis.annotations.Param;
+import com.jiantai.talent.entity.*;
+
 
 import java.util.List;
-import java.util.Map;
-
 
 public interface UserService {
-    User findUser(String account);
-    void register(User user);
-    void addUserNickName(User user);
-    void updateResumeState(User user);
-    List<DataEntity> getEducation();
-    List<DataEntity> getExperience();
-    List<DataEntity> getSalary();
-    void addResume(Resume resume);
-    List<Resume> findResume(Integer u_id);
-    void deleteResume(String id,String u_id);
-    void editResume(Resume resume);
-    void addStaffPhoto(User user);
+    User findUserByAccount(String account);
+    User findUserById(Integer id);
+    void updateUser(User user);
+    void addUser(User user);
+    StaffInfo findStaffInfoByUid(Integer uid);
+    void addStaffInfo( User user);
     void updateStaffInfo(StaffInfo staffInfo);
-    StaffInfo getStaffInfoByUid(Integer uid);
+    List<Education> getEducation();
+    List<Experience> getExperience();
+    List<Salary> getSalary();
+    List<Resume> findResume(Integer uid);
+    void addResume(Resume resume);
+    void deleteResume(Resume resume);
+    void editResume(Resume resume);
+    BossInfo findBossInfoByUid(User user);
+    void updateBossInfo(BossInfo bossInfo);
+    List<Welfare> getWelfare();
+    List<Recruit> getRecruit();
+    void addRecruit(Recruit recruit);
+    List<Recruit> findRecruitByUid(User user);
+    void updateRecruit(Recruit recruit);
+    Recruit findRecruitById(Recruit recruit);
+    List<Notice> getNotice();
 }

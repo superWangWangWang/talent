@@ -20,41 +20,40 @@
 
 
         <#if user??>
+            <#if user.type == 1>
 
-        <#if user.type == 1>
-
-                <#if selected?? && selected == "job">
-                <li class="cur">
-                    <a href="${request.contextPath}/public/job">
-                        <i><img src="${request.contextPath}/images/person_img/menu_icon02_01_r.png"></i>
-                        <span>求职</span>
-                    </a>
-                </li>
-                <#else>
-                    <li>
+                    <#if selected?? && selected == "job">
+                    <li class="cur">
                         <a href="${request.contextPath}/public/job">
-                            <i><img src="${request.contextPath}/images/person_img/menu_icon02_01.png"></i>
+                            <i><img src="${request.contextPath}/images/person_img/menu_icon02_01_r.png"></i>
                             <span>求职</span>
                         </a>
                     </li>
-                </#if>
-        <#elseif user.type == 2>
-                <#if selected?? && selected == "job">
-                    <li class="cur">
-                    <a href="${request.contextPath}/public/job">
-                        <i><img src="${request.contextPath}/images/person_img/menu_icon02_01_r.png"></i>
-                        <span>招聘</span>
-                    </a>
-                </li>
-                <#else>
-                <li>
-                    <a href="${request.contextPath}/public/job">
-                        <i><img src="${request.contextPath}/images/person_img/menu_icon02_01.png"></i>
-                        <span>招聘</span>
-                    </a>
-                </li>
-                </#if>
-    </#if>
+                    <#else>
+                        <li>
+                            <a href="${request.contextPath}/public/job">
+                                <i><img src="${request.contextPath}/images/person_img/menu_icon02_01.png"></i>
+                                <span>求职</span>
+                            </a>
+                        </li>
+                    </#if>
+             <#elseif user.type == 2>
+                    <#if selected?? && selected == "job">
+                        <li class="cur">
+                        <a href="${request.contextPath}/public/job">
+                            <i><img src="${request.contextPath}/images/person_img/menu_icon02_01_r.png"></i>
+                            <span>招聘</span>
+                        </a>
+                    </li>
+                    <#else>
+                    <li>
+                        <a href="${request.contextPath}/public/job">
+                            <i><img src="${request.contextPath}/images/person_img/menu_icon02_01.png"></i>
+                            <span>招聘</span>
+                        </a>
+                    </li>
+                    </#if>
+             </#if>
 
 
     <#else>
@@ -77,7 +76,7 @@
 
 <!--消息-->
 <#if selected?? && selected == "message">
-<li class="info cur">
+<li class="staffInfo cur">
     <a href="${request.contextPath}/user/message">
         <i><img src="${request.contextPath}/images/menu_icon03_r.png"></i>
         <span>消息</span>
@@ -85,7 +84,7 @@
     </a>
 </li>
 <#else>
-<li class="info">
+<li class="staffInfo">
     <a href="${request.contextPath}/user/message">
         <i><img src="${request.contextPath}/images/menu_icon03.png"></i>
         <span>消息</span>

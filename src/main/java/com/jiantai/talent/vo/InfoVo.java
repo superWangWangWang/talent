@@ -1,6 +1,6 @@
-package com.jiantai.talent.entity;
+package com.jiantai.talent.vo;
 
-public class StaffInfo {
+public class InfoVo {
     //id                  int(11)
     private Integer id;
     //uid                 int(11)       对应user表id

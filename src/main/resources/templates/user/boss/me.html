@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<#include "/common/head.html">
+<body>
+
+<!-- 内容框 -->
+<div class="zy_module-content">
+	<!-- 消息 -->
+	<div class="zy_content zy_vipbox">
+		<div class="vip_head mb6">
+			<div class="head pt5">
+				<i>
+				<#if info?? && info.photo?? && info.photo != "">
+					<img src="img?role=boss" style="width:100px;height: 100px; border-radius:50%; background: #fff;box-shadow: 0 0 0 5px #88bde8;">
+				<#else>
+						<img src="${request.contextPath}/images/common_img/default.png" style="width:100px;height: 100px; border-radius:50%; background: #fff;box-shadow: 0 0 0 5px #88bde8;">
+				</#if>
+				</i>
+		<br><br>
+				<!-- 简历公开 -->
+			<#if info??>
+				<h2>${info.name!"企业名称待更新"}</h2>
+			</#if>
+
+
+			</div>
+			<a href="logout"><div class="exit" >退出</div></a>
+		</div>
+		<div class="vip_menu">
+			<ul class="mb6">
+					<li>
+						<a href="${request.contextPath}/boss/info">
+							<img src="../images/common_img/vip_icon_01.png">
+							<span>资料设置</span>
+						</a>
+					</li>
+
+
+				<li>
+					<a href="${request.contextPath}/boss/recruit">
+						<img src="../images/common_img/vip_icon_02.png" id="jl">
+						<span>发布招聘</span>
+					</a>
+				</li>
+<!--				<li>-->
+<!--					<a href="user_myrecord.html">-->
+<!--						<img src="../images/common_img/vip_icon_03.png">-->
+<!--						<span>我的发布</span>-->
+<!--					</a>-->
+<!--				</li>-->
+				<li>
+					<a href="user_msyq.html">
+						<img src="../images/common_img/vip_icon_04.png">
+						<span>收到的求职简历</span>
+						<em class="n r gr">12</em>
+					</a>
+				</li>
+<!--				<li>-->
+<!--					<a href="user_mytrain.html">-->
+<!--						<img src="../images/common_img/vip_icon_05.png">-->
+<!--						<span>我的培训</span>-->
+<!--					</a>-->
+<!--				</li>-->
+				<li>
+					<a href="user_mysc.html">
+						<img src="../images/common_img/vip_icon_06.png">
+						<span>我的收藏</span>
+					</a>
+				</li>
+				<li>
+					<a href="school.html">
+						<img src="../images/common_img/vip_icon_07.png">
+						<span>我的人才库</span>
+<!--						<em class="n r g9">需开通入驻</em>-->
+					</a>
+				</li>
+			</ul>
+
+		</div>
+	</div>
+	
+	<!-- 返回顶部 -->
+	<div class="go_top">
+		<a class="btn_top"></a>
+	</div>
+	
+	<!-- 底部 -->
+	<div class="footer_box">
+		<div class="footer">
+			<h2>
+				<a>李丽丽</a><!-- 
+			 --><a href="../web_ruzhu/apply_index.html">同行入驻</a>
+			</h2>
+			<h3>
+				<span><a href="../web_other/about.html">关于我们</a></span>
+				<span><a href="../web_other/about.html">求职指南</a></span>
+				<span><a href="../web_other/about.html">联系我们</a></span>
+				<span><a href="../web_other/about.html">免责声明</a></span>
+			</h3>
+			<div class="txt">
+				<p>贵公网安备 11010602030054</p>
+			</div>
+		</div>
+	</div>
+
+	<!-- 底部导航 -->
+	<#include "/common/floor.html">
+	
+</div>
+
+
+</body>
+
+</html>

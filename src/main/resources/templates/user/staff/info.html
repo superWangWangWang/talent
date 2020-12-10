@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<#include "/common/head.html">
+<link rel="stylesheet" href="${request.contextPath}/layui/css/layui.css"  media="all">
+<script src="${request.contextPath}/layui/layui.js" charset="utf-8"></script>
+
+<link rel="stylesheet" type="text/css" href="${request.contextPath}/css/photo.css" />
+<!--<link rel="stylesheet" href="${request.contextPath}/css/cropper.min.css">-->
+<!--<link rel="stylesheet" href="${request.contextPath}/css/ImgCropping.css">-->
+
+<script type="text/javascript" src="${request.contextPath}/js/cropper.min.js"></script>
+
+<script src="${request.contextPath}/js/iscroll-zoom.js"></script>
+<script src="${request.contextPath}/js/hammer.js"></script>
+<script src="${request.contextPath}/js/jquery.photoClip.js"></script>
+
+
+<body class="bgwh">
+<script type="text/javascript">
+	var _width = $(window).width();
+	var _ziHao = 20 * (_width/320);
+	if(_width < 641){
+		$("#ben").css({"font-size":_ziHao + "px"})
+	}
+</script>
+<header class="zy_search_top_box scroll_fix">
+	<div class="zy_title_top fix">
+		<div class="one" href="javascript:" onclick="window.location.replace(document.referrer);"><img src="${request.contextPath}/images/back_jt.png"><span>返回</span></div>
+		<h1>账户信息</h1>
+		
+	</div>
+</header>
+<!-- 占位框 -->
+<div class="top_zhanwei_box"></div>
+
+<!-- 内容框 -->
+<div class="zy_module-content zy_vip_conbox">
+<div class="vip_user_info_mima vip_user_info_person">
+
+
+	<section class="logo-license" >
+		<div class="half" align="center" >
+			<a class="logo" id="logox">
+				<img id="bgl" src="${request.contextPath}/user/img?role=staff" >
+			</a>
+		</div>
+		<div class="clear"></div>
+	</section>
+	<article class="htmleaf-container">
+		<div id="clipArea"></div>
+		<div class="foot-use">
+			<div class="uploader1 blue" >
+				<input type="button" name="file" class="button" value="选择图片">
+				<input id="file" type="file" accept="image/*" multiple  />
+			</div>
+			<button id="clipBtn" style="margin-top: 0px;">截取/关闭</button>
+		</div>
+		<div id="view"></div>
+	</article>
+
+<form id="info-form">
+
+            <div class="form_line"><label><span>用户昵称</span><input type="text" name="nickName" value="${info.nickName!}"></label></div>
+            <div class="form_line"><label><span>真实姓名</span><input type="text" name="name" value="${(info.name)!}" placeholder="请填写真实姓名"></label></div>
+			<div class="form_line sexbox bbd">
+				<span>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别</span>
+				<#if info.sex == 0>
+				<label><input style="appearance: auto" type="radio" name="sex" value="0" checked="checked">女</label>
+				<label><input style="appearance: auto" type="radio" name="sex" value="1">男</label>
+				<#else>
+				<label><input style="appearance: auto" type="radio" name="sex" value="0">女</label>
+				<label><input style="appearance: auto" type="radio" name="sex" value="1" checked="checked">男</label>
+				</#if>
+			</div>
+
+			<div class="form_line"><label>
+				<span>年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;龄</span>
+				<input type="text" name="age" placeholder="请填写年龄" value="${info.age!}"></label>
+			</div>
+            <div class="form_line"><label>
+				<span>联系方式</span>
+				<input type="text" name="phoneNumber" placeholder="请填写联系电话" value="${info.phoneNumber!}"></label>
+			</div>
+			<div class="form_line"><label>
+				<span>籍&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;贯</span>
+				<input type="text" name="nativePlace" placeholder="请填写籍贯" value="${info.nativePlace!}"></label>
+			</div>
+			<div class="form_line"><label>
+				<span>民&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;族</span>
+				<input type="text" name="national" placeholder="请填写民族" value="${info.national!}"></label>
+			</div>
+			<div class="form_line"><label>
+				<span>身&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;高</span>
+				<input type="text" name="height" placeholder="请填写身高" value="${info.height!}"></label>
+			</div>
+			<div class="form_line sexbox bbd">
+				<span>婚&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;姻</span>
+			<#if info.married == 0>
+				<label><input style="appearance: auto" type="radio" name="married" value="0" checked="checked">未婚</label>
+				<label><input style="appearance: auto" type="radio" name="married" value="1">已婚</label>
+				<#else>
+				<label><input style="appearance: auto" type="radio" name="married" value="0">未婚</label>
+				<label><input style="appearance: auto" type="radio" name="married" value="1" checked="checked">已婚</label>
+			</#if>
+			</div>
+			<div class="form_line sexbox bbd">
+				<span>健&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;康</span>
+				<#if info.health == 0>
+				<label><input style="appearance: auto" type="radio" name="health" value="0" checked="checked">优</label>
+				<label><input style="appearance: auto" type="radio" name="health" value="1">良</label>
+				<label><input style="appearance: auto" type="radio" name="health" value="2">中</label>
+				<label><input style="appearance: auto" type="radio" name="health" value="3">差</label>
+				<#elseif info.health == 1>
+				<label><input style="appearance: auto" type="radio" name="health" value="0">优</label>
+				<label><input style="appearance: auto" type="radio" name="health" value="1" checked="checked">良</label>
+				<label><input style="appearance: auto" type="radio" name="health" value="2">中</label>
+				<label><input style="appearance: auto" type="radio" name="health" value="3">差</label>
+				<#elseif info.health == 2>
+				<label><input style="appearance: auto" type="radio" name="health" value="0">优</label>
+				<label><input style="appearance: auto" type="radio" name="health" value="1">良</label>
+				<label><input style="appearance: auto" type="radio" name="health" value="2" checked="checked">中</label>
+				<label><input style="appearance: auto" type="radio" name="health" value="3">差</label>
+				<#else>
+				<label><input style="appearance: auto" type="radio" name="health" value="0">优</label>
+				<label><input style="appearance: auto" type="radio" name="health" value="1">良</label>
+				<label><input style="appearance: auto" type="radio" name="health" value="2">中</label>
+				<label><input style="appearance: auto" type="radio" name="health" value="3" checked="checked">差</label>
+			</#if>
+			</div>
+			<div class="form_line"><label>
+				<span>求职意向</span>
+				<input type="text" name="intention" placeholder="请填写求职意向" value="${info.intention!}"></label>
+			</div>
+			<div class="form_line"><label>
+				<span>居住地址</span>
+				<input type="text" name="address" placeholder="请填写居住地址" value="${info.address!}"></label>
+			</div>
+			<div class="form_line"><label>
+				<span>技能特长</span>
+				<input type="text" name="skillsAndHobbies" placeholder="请填写技能特长" value="${info.skillsAndHobbies!}"></label>
+			</div>
+			<div class="form_line sexbox bbd">
+				<span>最高学历</span>
+				<#list educationList as l>
+					<#if info.education == l.id>
+						<label><input style="appearance: auto" type="radio" name="education" value="${l.id}" checked="checked">${l.name}</label>
+					<#else>
+				<label><input style="appearance: auto" type="radio" name="education" value="${l.id}">${l.name}</label>
+					</#if>
+				</#list>
+			</div>
+
+
+<!--			<input hidden="hidden" id="photo" name="photo" value="" type="text" >-->
+<div id="photo" hidden="hidden"></div>
+            <button class="zy_butn bord_3" type="button" onclick="update()">确认修改</button>
+		</form>
+		
+	</div>
+</div>
+
+</body>
+<script>
+	var obUrl = ''
+	$("#clipArea").photoClip({
+		width: 300,
+		height: 300,
+		file: "#file",
+		view: "#view",
+		ok: "#clipBtn",
+		loadStart: function() {
+			console.log("照片读取中");
+		},
+		loadComplete: function() {
+			console.log("照片读取完成");
+		},
+		clipFinish: function(dataURL) {
+			dataURL = encodeURIComponent(dataURL)
+			document.getElementById("photo").innerText = dataURL;
+		}
+	});
+</script>
+<script>
+	$(function(){
+		$("#logox").click(function(){
+			$(".htmleaf-container").show();
+		})
+		$("#clipBtn").click(function(){
+			if (imgsource != ""){
+				$("#logox").empty();
+				$('#logox').append('<img src="' + imgsource + '" align="absmiddle" style=" width: 3rem;height: 3rem;">');
+			}
+
+			$(".htmleaf-container").hide();
+		})
+		$("#closeBtn").click(function(){
+			$(".htmleaf-container").hide();
+		})
+	});
+	function update() {
+		var param = $.param({photo: document.getElementById("photo").innerText}) + "&" + $("#info-form").serialize();
+		$.ajax({
+			url:"updateInfo",
+			type:"post",
+			dataType:"json",
+			data:param,
+			success:function (data) {
+				myAlert( data.msg)
+			}
+		})
+	}
+</script>
+
+</html>

@@ -16,10 +16,10 @@
 <!-- 内容框 -->
 <div class="zy_module-content zy_vip_conbox">
 	<div class="vip_user_info_mima vip_user_createbox">
-		<form id="info">
-			<div class="headpic mb6 bgwh">
-				<i><img src="../images/common_img/woman.png"/></i>
-			</div>
+		<form id="staffInfo">
+<!--			<div class="headpic mb6 bgwh">-->
+<!--				<i><img src="../images/common_img/woman.png"/></i>-->
+<!--			</div>-->
 			<div class="write bgwh">
 				<div class="form_line">
 					<label><span>姓名</span><input type="text" name="name" id="name" placeholder="请输入姓名"></label>
@@ -31,39 +31,6 @@
 
 				</div>
 
-<!--				<div class="form_line sexbox bbd">-->
-<!--					<span>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别</span>-->
-<!--					<#if user??>-->
-<!--					<label>-->
-<!--						<select name="sex" id="sex" class="text"-->
-<!--								style="height:40px;-webkit-appearance:none;appearance:none;border: 1px solid #6d6d72;-->
-<!--							font-size:20px;padding:0px 10px 0px;-->
-<!--							display:block;width:100%;-webkit-box-sizing:border-box;box-sizing:border-box;background-color: #FFFFFF;-->
-<!--							color:#333333;border-radius:4px;">-->
-<!--							<#if user.sex == 0>-->
-<!--							<option value="0" selected>女</option>-->
-<!--							<option value="1">男</option>-->
-<!--							<option value="1">其他</option>-->
-<!--							<#elseif user.sex == 1>-->
-<!--							<option value="0" >女</option>-->
-<!--							<option value="1" selected>男</option>-->
-<!--							<option value="1">其他</option>-->
-<!--							<#elseif user.sex == 2>-->
-<!--							<option value="0" >女</option>-->
-<!--							<option value="1" >男</option>-->
-<!--							<option value="1" selected>其他</option>-->
-<!--							<#else>-->
-<!--							<option value="0" >女</option>-->
-<!--							<option value="1" >男</option>-->
-<!--							<option value="1" >其他</option>-->
-<!--						</#if>-->
-
-<!--						</select>-->
-<!--					</label>-->
-<!--				</#if>-->
-
-<!--			</div>-->
-
 
 	            <div class="form_line">
 					<label><span>年龄</span><input type="text" name="age" id="age" placeholder="请输入年龄"></label>
@@ -72,53 +39,32 @@
 					<span>学历</span>
 					<select name="education" id="education">
 <!--						<option value="">请选择学历</option>-->
-						<#list educationList as list>
-						<option value="${list.id}">${list.name}</option>
+						<#list educationList as l>
+							<#if l.name != '无要求'>
+							<option value="${l.id}">${l.name}</option>
+							</#if>
 						</#list>
 					</select>
 				</div>
-<!--				<div class="form_line bbd xzbox work_style">-->
-<!--					<span>求职意向</span>-->
-<!--					<select>-->
-<!--						<option>请选择职位类型</option>-->
-<!--						<option>销售</option>-->
-<!--						<option>技工/工人</option>-->
-<!--						<option>计算机/互联网</option>-->
-<!--						<option>电子商务</option>-->
-<!--						<option>园林设计</option>-->
-<!--					</select>-->
-<!--					<select>-->
-<!--						<option>请选择职位</option>-->
-<!--						<option>电话销售</option>-->
-<!--						<option>销售代表</option>-->
-<!--						<option>销售助理</option>-->
-<!--						<option>销售主管/经理</option>-->
-<!--						<option>商务主管/经理</option>-->
-<!--					</select>-->
-<!--				</div>-->
+
 			<div class="form_line">
-				<label><span>求职意向</span><input type="text" name="intention" id="intention" placeholder="请输入求职意向"></label>
+				<label><span>求职意向</span><input type="text" name="intention" id="intention" placeholder="请输入求职岗位"></label>
 			</div>
 				<div class="form_line bbd xzbox">
 					<span>工作经验</span>
 					<select name="experience" id="experience">
-<!--						<option>请选择工作经验</option>-->
-						<#list experienceList as list>
-						<option value="${list.id}">${list.name}</option>
+						<#list experienceList as l>
+							<#if l.name != '无要求'>
+							<option value="${l.id}">${l.name}</option>
+							</#if>
 						</#list>
 					</select>
 				</div>
 				<div class="form_line bbd xzbox">
 					<span>期望月薪</span>
 					<select name="salary" id="salary">
-						<#list salaryList as list>
-							<#if list.min == 0>
-								<option value="${list.id}">${list.max}以下</option>
-							<#elseif list.max == 100000000>
-								<option value="${list.id}">${list.min}以上</option>
-							<#else>
-								<option value="${list.id}">${list.min}-${list.max}</option>
-							</#if>
+						<#list salaryList as l>
+						<option value="${l.id}">${l.name}</option>
 						</#list>
 					</select>
 				</div>
@@ -180,7 +126,7 @@
 				url:"addResume",
 				dataType:"json",
 				type:"post",
-				data:$("#info").serialize(),
+				data:$("#staffInfo").serialize(),
 				success:function (data) {
 					if (data.code == 0){
 						history.back();

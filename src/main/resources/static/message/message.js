@@ -43,7 +43,7 @@
   e(2);
   var r = e(0), o = e.n(r);
   document.createElement("div").innerHTML = o.a, function (n, t) {
-    n.alert = i("alert"), n.confirm = i("confirm"), n.dialog = i("alert");
+    n.myAlert = i("alert"), n.confirm = i("confirm"), n.dialog = i("alert");
     var e = 9999, r = t.createElement("style");
 
     function i(n) {
